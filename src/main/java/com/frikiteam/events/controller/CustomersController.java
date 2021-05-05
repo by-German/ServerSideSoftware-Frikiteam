@@ -35,6 +35,11 @@ public class CustomersController {
         return new PageImpl<>(resources, pageable, resources.size());
     }
 
+    @GetMapping("/customers/{id}")
+    public CustomerResource getByIdCustomer(@PathVariable Long id){
+        return convertToResource(customerService.getCustomerById(id));
+    }
+
     @PostMapping("/customers")
     public CustomerResource saveCustomer(@Valid @RequestBody SaveCustomerResource resource) {
         Customer customer = convertToEntity(resource);
