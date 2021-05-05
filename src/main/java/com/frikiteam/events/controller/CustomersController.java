@@ -32,27 +32,18 @@ public class CustomersController {
                 .stream()
                 .map(this::convertToResource)
                 .collect(Collectors.toList());
-        System.out.println("LLEGO GET");
-
         return new PageImpl<>(resources, pageable, resources.size());
-
     }
 
-    /*
+    @GetMapping("/customers/{id}")
+    public CustomerResource getByIdCustomer(@PathVariable Long id){
+        return convertToResource(customerService.getCustomerById(id));
+    }
+
     @PostMapping("/customers")
     public CustomerResource saveCustomer(@Valid @RequestBody SaveCustomerResource resource) {
         Customer customer = convertToEntity(resource);
         return convertToResource(customerService.saveCustomer(customer));
-    }
-    */
-    @PostMapping("/customers")
-    public Customer saveCustomer(@RequestBody Customer resource) {
-       /* Customer customer = convertToEntity(resource);
-        return convertToResource(customerService.saveCustomer(customer));
-
-        */
-        System.out.println("LLEGO");
-        return customerService.saveCustomer(resource);
     }
 
     @PutMapping("/customers/{id}")

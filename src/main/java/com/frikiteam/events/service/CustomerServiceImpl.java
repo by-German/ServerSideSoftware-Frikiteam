@@ -30,8 +30,6 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer saveCustomer(Customer customer) {
-        System.out.println("LLEGO A SERVICE");
-
         return customerRepository.save(customer);
     }
 
