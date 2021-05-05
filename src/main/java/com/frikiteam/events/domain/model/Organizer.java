@@ -19,10 +19,7 @@ public class Organizer extends User{
 
     private String logo;
 
-    public Organizer(String description, boolean verified, String logo) {
-        this.description = description;
-        this.verified = verified;
-        this.logo = logo;
+    public Organizer() {
     }
 
     public Organizer(String firstName, String lastName, String password, String email, String description, boolean verified, String logo) {
@@ -30,5 +27,12 @@ public class Organizer extends User{
         this.description = description;
         this.verified = verified;
         this.logo = logo;
+    }
+
+    public boolean getVerified() {
+        return this.verified;
+    }
+    public void setVerified(boolean verified) {
+        this.verified = verified;
     }
 }
