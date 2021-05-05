@@ -1,4 +1,4 @@
-package com.rodrigo.miparte.resource;
+package com.frikiteam.events.resource;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

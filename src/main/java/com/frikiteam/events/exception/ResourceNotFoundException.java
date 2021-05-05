@@ -1,4 +1,4 @@
-package com.rodrigo.miparte.exception;
+package com.frikiteam.events.exception;
 
 import org.springframework.web.bind.annotation.ResponseStatus;
 

@@ -1,10 +1,10 @@
-package com.rodrigo.miparte.controllers;
+package com.frikiteam.events.controller;
 
 
-import com.rodrigo.miparte.domain.model.Country;
-import com.rodrigo.miparte.domain.service.ICountryService;
-import com.rodrigo.miparte.resource.CountryResource;
-import com.rodrigo.miparte.resource.SaveCountryResource;
+import com.frikiteam.events.domain.model.Country;
+import com.frikiteam.events.domain.service.ICountryService;
+import com.frikiteam.events.resource.CountryResource;
+import com.frikiteam.events.resource.SaveCountryResource;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

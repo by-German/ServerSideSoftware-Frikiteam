@@ -1,13 +1,9 @@
-package com.rodrigo.miparte.controllers;
+package com.frikiteam.events.controller;
 
-import com.rodrigo.miparte.domain.model.District;
-import com.rodrigo.miparte.domain.model.Place;
-import com.rodrigo.miparte.domain.service.IDistrictService;
-import com.rodrigo.miparte.domain.service.IPlaceService;
-import com.rodrigo.miparte.resource.DistrictResource;
-import com.rodrigo.miparte.resource.PlaceResource;
-import com.rodrigo.miparte.resource.SaveDistrictResource;
-import com.rodrigo.miparte.resource.SavePlaceResource;
+import com.frikiteam.events.domain.model.Place;
+import com.frikiteam.events.domain.service.IPlaceService;
+import com.frikiteam.events.resource.PlaceResource;
+import com.frikiteam.events.resource.SavePlaceResource;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

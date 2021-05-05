@@ -1,4 +1,4 @@
-package com.rodrigo.miparte.resource;
+package com.frikiteam.events.resource;
 
 public class DistrictResource {
     private Long id;

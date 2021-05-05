@@ -1,4 +1,4 @@
-package com.rodrigo.miparte.domain.model;
+package com.frikiteam.events.domain.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

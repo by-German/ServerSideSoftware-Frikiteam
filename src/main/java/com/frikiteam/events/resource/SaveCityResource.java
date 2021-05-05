@@ -1,6 +1,4 @@
-package com.rodrigo.miparte.resource;
-
-import com.rodrigo.miparte.domain.model.Country;
+package com.frikiteam.events.resource;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

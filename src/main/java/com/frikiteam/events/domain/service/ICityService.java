@@ -1,7 +1,6 @@
-package com.rodrigo.miparte.domain.service;
+package com.frikiteam.events.domain.service;
 
-import com.rodrigo.miparte.domain.model.City;
-import com.rodrigo.miparte.domain.model.Country;
+import com.frikiteam.events.domain.model.City;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;

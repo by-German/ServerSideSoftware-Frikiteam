@@ -1,10 +1,10 @@
-package com.rodrigo.miparte.service;
+package com.frikiteam.events.service;
 
-import com.rodrigo.miparte.domain.model.City;
-import com.rodrigo.miparte.domain.repository.CityRepository;
-import com.rodrigo.miparte.domain.repository.CountryRepository;
-import com.rodrigo.miparte.domain.service.ICityService;
-import com.rodrigo.miparte.exception.ResourceNotFoundException;
+import com.frikiteam.events.domain.model.City;
+import com.frikiteam.events.domain.repository.CityRepository;
+import com.frikiteam.events.domain.repository.CountryRepository;
+import com.frikiteam.events.domain.service.ICityService;
+import com.frikiteam.events.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

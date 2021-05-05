@@ -1,6 +1,4 @@
-package com.rodrigo.miparte.domain.model;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+package com.frikiteam.events.domain.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
