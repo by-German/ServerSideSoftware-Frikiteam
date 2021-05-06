@@ -1,7 +1,7 @@
-package com.rodrigo.miparte.domain.repository;
+package com.frikiteam.events.domain.repositories;
 
 
-import com.rodrigo.miparte.domain.model.City;
+import com.frikiteam.events.domain.model.City;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

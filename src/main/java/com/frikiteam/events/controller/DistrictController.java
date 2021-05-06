@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/api")
 public class DistrictController {
     @Autowired
     private ModelMapper mapper;

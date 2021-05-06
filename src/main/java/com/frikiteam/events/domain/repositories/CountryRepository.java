@@ -1,6 +1,6 @@
-package com.rodrigo.miparte.domain.repository;
+package com.frikiteam.events.domain.repositories;
 
-import com.rodrigo.miparte.domain.model.Country;
+import com.frikiteam.events.domain.model.Country;
 import org.apache.coyote.Response;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

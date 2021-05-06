@@ -1,7 +1,7 @@
 package com.frikiteam.events.service;
 
 import com.frikiteam.events.domain.model.Place;
-import com.frikiteam.events.domain.repository.PlaceRepository;
+import com.frikiteam.events.domain.repositories.PlaceRepository;
 import com.frikiteam.events.domain.service.IPlaceService;
 import com.frikiteam.events.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

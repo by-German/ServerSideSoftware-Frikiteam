@@ -1,7 +1,7 @@
 package com.frikiteam.events.service;
 
 import com.frikiteam.events.domain.model.District;
-import com.frikiteam.events.domain.repository.DistrictRepository;
+import com.frikiteam.events.domain.repositories.DistrictRepository;
 import com.frikiteam.events.domain.service.IDistrictService;
 import com.frikiteam.events.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

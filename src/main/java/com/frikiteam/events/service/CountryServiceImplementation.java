@@ -2,7 +2,7 @@ package com.frikiteam.events.service;
 
 
 import com.frikiteam.events.domain.model.Country;
-import com.frikiteam.events.domain.repository.CountryRepository;
+import com.frikiteam.events.domain.repositories.CountryRepository;
 import com.frikiteam.events.domain.service.ICountryService;
 import com.frikiteam.events.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

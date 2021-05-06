@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@RequestMapping("/api")
 public class CityController {
     @Autowired
     private ModelMapper mapper;
@@ -38,25 +39,25 @@ public class CityController {
         return new PageImpl<>(resources,pageable,resources.size());
     }
 
-    @PostMapping("/cities/create")
+    @PostMapping("/cities")
     public CityResource createCity(@Valid @RequestBody SaveCityResource resource){
         City city = convertToEntity(resource);
         return convertToResource(cityService.createCity(city));
     }
 
-    @PutMapping("/cities/update/{cityId}/{countryId}")
+    @PutMapping("/cities/{cityId}")
     public CityResource updateCity(@PathVariable Long cityId, @RequestBody SaveCityResource resource){
         City city = convertToEntity(resource);
         return convertToResource(cityService.updateCity(cityId,city));
     }
 
-    @DeleteMapping("/cities/delete/{countryID}")
+    @DeleteMapping("/cities/{cityId}")
     public ResponseEntity<?> deleteCity(@PathVariable Long cityId)
     {
         return cityService.deleteCity(cityId);
     }
 
-    @GetMapping("/cities/get/{countryId}")
+    @GetMapping("/cities/{cityId}")
     public CityResource getCityById(@PathVariable Long cityId){
         return convertToResource(cityService.getCityById(cityId));
     }
