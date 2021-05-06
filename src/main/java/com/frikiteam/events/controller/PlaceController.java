@@ -40,25 +40,25 @@ public class PlaceController {
         return new PageImpl<>(resources,pageable,resources.size());
     }
 
-    @PostMapping("/places/create")
+    @PostMapping("/places")
     public PlaceResource createPlace(@Valid @RequestBody SavePlaceResource resource){
         Place place = convertToEntity(resource);
         return convertToResource(placeService.createPlace(place));
     }
 
-    @PutMapping("/places/update/{placeId}")
+    @PutMapping("/places/{placeId}")
     public PlaceResource updatePlace(@PathVariable Long placeId,@RequestBody SavePlaceResource resource){
         Place place = convertToEntity(resource);
         return convertToResource(placeService.updatePlace(placeId,place));
     }
 
-    @DeleteMapping("/places/delete/{placeId}")
+    @DeleteMapping("/places/{placeId}")
     public ResponseEntity<?> deletePlace(@PathVariable Long placeId)
     {
         return placeService.deletePlace(placeId);
     }
 
-    @GetMapping("/places/get/{placeId}")
+    @GetMapping("/places/{placeId}")
     public PlaceResource getPlaceById(@PathVariable Long placeId){
         return convertToResource(placeService.getPlaceById(placeId));
     }

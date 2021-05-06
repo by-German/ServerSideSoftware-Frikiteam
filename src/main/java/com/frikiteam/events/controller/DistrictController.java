@@ -39,25 +39,25 @@ public class DistrictController {
         return new PageImpl<>(resources,pageable,resources.size());
     }
 
-    @PostMapping("/districts/create")
+    @PostMapping("/districts")
     public DistrictResource createDistrict(@Valid @RequestBody SaveDistrictResource resource){
         District district = convertToEntity(resource);
         return convertToResource(districtService.createDistrict(district));
     }
 
-    @PutMapping("/districts/update/{districtId}")
+    @PutMapping("/districts/{districtId}")
     public DistrictResource updateDistrict(@PathVariable Long districtId,@RequestBody SaveDistrictResource resource){
         District district = convertToEntity(resource);
         return convertToResource(districtService.updateDistrict(districtId,district));
     }
 
-    @DeleteMapping("/districts/delete/{districtId}")
+    @DeleteMapping("/districts/{districtId}")
     public ResponseEntity<?> deleteDistrict(@PathVariable Long districtId)
     {
         return districtService.deleteDistrict(districtId);
     }
 
-    @GetMapping("/districts/get/{districtId}")
+    @GetMapping("/districts/{districtId}")
     public DistrictResource getDistrictById(@PathVariable Long districtId){
         return convertToResource(districtService.getDistrictById(districtId));
     }

@@ -40,25 +40,25 @@ public class CountryController {
         return new PageImpl<>(resources,pageable,resources.size());
     }
 
-    @PostMapping("/countries/create")
+    @PostMapping("/countries")
     public CountryResource createCountry(@Valid @RequestBody SaveCountryResource resource){
         Country country = convertToEntity(resource);
         return convertToResource(countryService.createCountry(country));
     }
 
-    @PutMapping("/countries/update/{countryId}")
+    @PutMapping("/countries/{countryId}")
     public CountryResource updateCountry(@PathVariable Long countryId,@RequestBody SaveCountryResource resource){
         Country country = convertToEntity(resource);
         return convertToResource(countryService.updateCountry(countryId, country));
     }
 
-    @DeleteMapping("/countries/delete/{countryId}")
+    @DeleteMapping("/countries/{countryId}")
     public ResponseEntity<?> deleteCountry(@PathVariable Long countryId)
     {
         return countryService.deleteCountry(countryId);
     }
 
-    @GetMapping("/countries/get/{countryId}")
+    @GetMapping("/countries/{countryId}")
     public CountryResource getCountryById(@PathVariable Long countryId){
         return convertToResource(countryService.getCountryById(countryId));
     }
