@@ -4,6 +4,10 @@ import com.frikiteam.events.domain.model.Customer;
 import com.frikiteam.events.domain.service.CustomerService;
 import com.frikiteam.events.resource.CustomerResource;
 import com.frikiteam.events.resource.SaveCustomerResource;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,6 +29,12 @@ public class CustomersController {
     @Autowired
     private ModelMapper mapper;
 
+    @Operation(summary = "Get Customers", description = "Get All Customers by Pages", tags = {"customers"})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "All Customers returned",
+                    content = @Content(mediaType = "application/json"))
+    })
     @GetMapping("/customers")
     public Page<CustomerResource> getAllCustomers(Pageable pageable){
         Page<Customer> customers = customerService.getAllCustomers(pageable);
