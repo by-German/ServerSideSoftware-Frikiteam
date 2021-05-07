@@ -34,7 +34,7 @@ public class OrganizerServiceImpl implements OrganizerService {
     @Override
     public ResponseEntity<?> deleteOrganizer(Long id) {
         Organizer organizer = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Customer", "id", id));
+                .orElseThrow(() -> new ResourceNotFoundException("Organizer", "id", id));
         repository.delete(organizer);
         return ResponseEntity.ok().build();
     }
@@ -42,7 +42,7 @@ public class OrganizerServiceImpl implements OrganizerService {
     @Override
     public Organizer updateOrganizer(Long id, Organizer organizer) {
         Organizer existed = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Customer", "id", id));
+                .orElseThrow(() -> new ResourceNotFoundException("Organizer", "id", id));
 
         existed.setFirstName(organizer.getFirstName());
         existed.setLastName(organizer.getLastName());
