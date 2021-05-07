@@ -30,11 +30,11 @@ public class CustomersController {
     private ModelMapper mapper;
 
     @Operation(summary = "Get Customers", description = "Get All Customers by Pages", tags = {"customers"})
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200",
-                    description = "All Customers returned",
-                    content = @Content(mediaType = "application/json"))
-    })
+    @ApiResponse(
+            responseCode = "200",
+            description = "All Customers returned",
+            content = @Content(mediaType = "application/json")
+    )
     @GetMapping("/customers")
     public Page<CustomerResource> getAllCustomers(Pageable pageable){
         Page<Customer> customers = customerService.getAllCustomers(pageable);
@@ -45,23 +45,48 @@ public class CustomersController {
         return new PageImpl<>(resources, pageable, resources.size());
     }
 
+    @Operation(summary = "Get Customers by id", description = "Get a customer given an id", tags = {"customers"})
+    @ApiResponse(
+            responseCode = "200",
+            description = "Return a customer",
+            content = @Content(mediaType = "application/json")
+    )
     @GetMapping("/customers/{id}")
     public CustomerResource getByIdCustomer(@PathVariable Long id){
         return convertToResource(customerService.getCustomerById(id));
     }
 
+    @Operation(summary = "Save a Customer   ", description = "Save a customer", tags = {"customers"})
+    @ApiResponse(
+            responseCode = "200",
+            description = "Return the customer saved",
+            content = @Content(mediaType = "application/json")
+    )
     @PostMapping("/customers")
     public CustomerResource saveCustomer(@Valid @RequestBody SaveCustomerResource resource) {
         Customer customer = convertToEntity(resource);
         return convertToResource(customerService.saveCustomer(customer));
     }
 
+
+    @Operation(summary = "Update a Customer", description = "Update a customer given an id and customer body", tags = {"customers"})
+    @ApiResponse(
+            responseCode = "200",
+            description = "Return the customer updated",
+            content = @Content(mediaType = "application/json")
+    )
     @PutMapping("/customers/{id}")
     public CustomerResource updateCustomer(@PathVariable Long id, @RequestBody SaveCustomerResource resource){
         Customer customer = convertToEntity(resource);
         return convertToResource(customerService.updateCustomer(id, customer));
     }
 
+    @Operation(summary = "Delete a Customer", description = "remove a customer given an id", tags = {"customers"})
+    @ApiResponse(
+            responseCode = "200",
+            description = "Return ResponseEntity",
+            content = @Content(mediaType = "application/json")
+    )
     @DeleteMapping("/customers/{id}")
     public ResponseEntity<?> deleteCustomer(@PathVariable Long id){
         return customerService.deleteCustomer(id);
