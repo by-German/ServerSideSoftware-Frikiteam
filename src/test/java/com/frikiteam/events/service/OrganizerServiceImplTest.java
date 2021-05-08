@@ -129,6 +129,7 @@ class OrganizerServiceImplTest {
         Organizer updateOrganizer = new Organizer();
         updateOrganizer.setId(id);
         updateOrganizer.setFirstName("Alex");
+
         Organizer oldOrganizer = new Organizer();
         oldOrganizer.setId(1L);
         oldOrganizer.setFirstName("Alexis");

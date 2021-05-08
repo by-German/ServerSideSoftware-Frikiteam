@@ -19,11 +19,11 @@ public class EventInformation {
     private String description;
 
     @Column(name = "start_date")
-    @NotNull
+    //@NotNull
     private Date startDate;
 
     @Column(name = "end_date")
-    @NotNull
+    //@NotNull
     private Date endDate;
 
     @NotNull
