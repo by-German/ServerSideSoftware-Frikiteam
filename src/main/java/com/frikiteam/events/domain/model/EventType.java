@@ -10,8 +10,8 @@ import java.util.List;
 
 @Entity
 @Data
-@Table(name = "type_events")
-public class TypeEvent {
+@Table(name = "event_types")
+public class EventType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,10 +31,10 @@ public class TypeEvent {
     )
     private List<Event> events;
     */
-    public TypeEvent() {
+    public EventType() {
     }
 
-    public TypeEvent(@NotNull @Size(max = 100) String name) {
+    public EventType(@NotNull @Size(max = 100) String name) {
         this.name = name;
     }
 
