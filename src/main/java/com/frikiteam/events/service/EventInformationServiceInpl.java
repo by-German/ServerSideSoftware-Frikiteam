@@ -1,9 +1,12 @@
 package com.frikiteam.events.service;
 
 import com.frikiteam.events.domain.model.EventInformation;
+import com.frikiteam.events.domain.model.Organizer;
 import com.frikiteam.events.domain.repositories.EventInformationRepository;
 import com.frikiteam.events.domain.service.EventInformationService;
+import com.frikiteam.events.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -24,34 +27,28 @@ public class EventInformationServiceInpl implements EventInformationService {
     }
 
     @Override
-    public Optional<EventInformation> getEventInformationById(Long id) {
-        return eventsInformationRepository.findById(id);
+    public EventInformation getEventInformationById(Long id) {
+        return eventsInformationRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("EventInformation", "id", id));
     }
 
     @Override
-    public boolean deleteEventInformation(Long id) {
-        try{
-            eventsInformationRepository.deleteById(id);
-            return true;
-        }catch(Exception err){
-            return false;
-        }
+    public ResponseEntity<?> deleteEventInformation(Long id) {
+
+        EventInformation eventInformation = eventsInformationRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("EventInformation", "id", id));
+        eventsInformationRepository.delete(eventInformation);
+        return ResponseEntity.ok().build();
     }
 
     @Override
     public EventInformation updateEventInformation(Long id, EventInformation eventInformation) {
-        EventInformation existed = eventsInformationRepository.findById(id).orElse(null);
+        EventInformation existed = eventsInformationRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("EventInformation", "id", id));
 
-        if(existed==null){
-            return null;
-        }
-
-
-        existed.setImage(eventInformation.getImage());
-        existed.setDescription(eventInformation.getDescription());
-        existed.setStartDate(eventInformation.getStartDate());
-        existed.setLink(eventInformation.getLink());
-        existed.setEndDate(eventInformation.getEndDate());
+            existed.setId(eventInformation.getId());
+            existed.setImage(eventInformation.getImage());
+            existed.setLink(eventInformation.getLink());
+            existed.setDescription(eventInformation.getDescription());
 
         return eventsInformationRepository.save(existed);
     }
