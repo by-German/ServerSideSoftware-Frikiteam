@@ -1,6 +1,6 @@
 package com.frikiteam.events.resource;
 
-public class TypeEventResource {
+public class EventTypeResource {
     private Long id;
     private String name;
 
@@ -8,7 +8,7 @@ public class TypeEventResource {
         return id;
     }
 
-    public TypeEventResource setId(Long id) {
+    public EventTypeResource setId(Long id) {
         this.id = id;
         return this;
     }
@@ -17,7 +17,7 @@ public class TypeEventResource {
         return name;
     }
 
-    public TypeEventResource setName(String name) {
+    public EventTypeResource setName(String name) {
         this.name = name;
         return this;
     }
