@@ -1,7 +1,9 @@
 package com.frikiteam.events.domain.model;
 
 import javax.persistence.*;
-import javax.xml.stream.events.Comment;
+import java.security.AllPermission;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "events")
@@ -20,6 +22,9 @@ public class Event {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Organizer organizer;
 
-    @ManyToMany
-
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "event_comments",
+            joinColumns = {@JoinColumn(name = "event_id")},
+            inverseJoinColumns = {@JoinColumn(name = "comment_id")})
+    private List<Comment> comments = new ArrayList<>();
 }

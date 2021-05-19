@@ -1,6 +1,8 @@
 package com.frikiteam.events.domain.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "comments")
@@ -14,5 +16,6 @@ public class Comment {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Customer customer;
 
-
+    @ManyToMany(mappedBy = "comments")
+    private List<Event> events = new ArrayList<>();
 }

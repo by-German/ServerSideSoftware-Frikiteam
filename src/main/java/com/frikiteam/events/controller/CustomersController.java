@@ -68,7 +68,6 @@ public class CustomersController {
         return convertToResource(customerService.saveCustomer(customer));
     }
 
-
     @Operation(summary = "Update a Customer", description = "Update a customer given an id and customer body", tags = {"customers"})
     @ApiResponse(
             responseCode = "200",
