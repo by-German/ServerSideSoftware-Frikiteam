@@ -1,7 +1,6 @@
 package com.frikiteam.events.service;
 
 import com.frikiteam.events.domain.model.EventInformation;
-import com.frikiteam.events.domain.model.Organizer;
 import com.frikiteam.events.domain.repositories.EventInformationRepository;
 import com.frikiteam.events.domain.service.EventInformationService;
 import com.frikiteam.events.exception.ResourceNotFoundException;
@@ -10,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 @Service
 public class EventInformationServiceInpl implements EventInformationService {

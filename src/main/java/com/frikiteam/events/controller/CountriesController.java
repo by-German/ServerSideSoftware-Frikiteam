@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
-public class CountryController {
+public class CountriesController {
     @Autowired
     private ModelMapper mapper;
     @Autowired

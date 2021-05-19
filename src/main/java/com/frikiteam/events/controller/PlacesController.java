@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
-public class PlaceController {
+public class PlacesController {
     @Autowired
     private ModelMapper mapper;
     @Autowired
