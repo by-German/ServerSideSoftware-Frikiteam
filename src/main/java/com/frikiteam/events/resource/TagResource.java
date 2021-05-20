@@ -3,10 +3,8 @@ package com.frikiteam.events.resource;
 import lombok.Data;
 
 @Data
-public class PlaceResource {
+public class TagResource {
     private Long id;
     private String name;
-    private String reference;
-    private DistrictResource district;
-
+    private String description;
 }

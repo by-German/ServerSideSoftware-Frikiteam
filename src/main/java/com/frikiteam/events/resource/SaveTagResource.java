@@ -3,7 +3,7 @@ package com.frikiteam.events.resource;
 import lombok.Data;
 
 @Data
-public class CountryResource {
-    private Long id;
+public class SaveTagResource {
     private String name;
+    private String description;
 }

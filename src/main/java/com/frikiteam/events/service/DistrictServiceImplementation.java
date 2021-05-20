@@ -32,7 +32,6 @@ public class DistrictServiceImplementation implements IDistrictService {
         District district = districtRepository.findById(districtId)
                 .orElseThrow(()->new ResourceNotFoundException("District", "id", districtId));
         district.setName(requestDistrict.getName());
-        district.setReference(requestDistrict.getReference());
         return districtRepository.save(district);
     }
 

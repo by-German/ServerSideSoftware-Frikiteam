@@ -36,7 +36,6 @@ public class CityServiceImplementation implements ICityService {
                 .orElseThrow(()->new ResourceNotFoundException("City", "id", cityId));
 
         city.setName(requestCity.getName());
-        city.setReference(requestCity.getReference());
         return cityRepository.save(city);
     }
 

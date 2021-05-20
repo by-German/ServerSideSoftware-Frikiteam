@@ -22,13 +22,13 @@ public class Event {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Organizer organizer;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     private EventType eventType;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Place place;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     private EventInformation eventInformation;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
