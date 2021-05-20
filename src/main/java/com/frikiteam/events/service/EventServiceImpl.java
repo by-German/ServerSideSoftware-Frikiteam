@@ -34,4 +34,21 @@ public class EventServiceImpl implements EventService {
 
         return eventRepository.save(event);
     }
+
+    @Override
+    public Event updateEvent(Long organizerId, Long eventId, Event event) {
+        return organizerRepository.findById(organizerId)
+                .map(organizer -> {
+                    Event event1 = eventRepository.findById(eventId)
+                            .orElseThrow(() -> new ResourceNotFoundException("Event", "Id", eventId));
+                    if (event1.getOrganizer() != organizer)
+                        throw new RuntimeException("Event " + eventId + " for Organizer " + organizerId + " not found");
+                    event1.setName(event.getName());
+                    event1.setQuantity(event.getQuantity());
+                    event1.setPrice(event.getPrice());
+                    event1.setInformation(event.getInformation());
+                    return eventRepository.save(event1);
+                })
+                .orElseThrow(() -> new ResourceNotFoundException("Organizer", "Id", organizerId));
+    }
 }
