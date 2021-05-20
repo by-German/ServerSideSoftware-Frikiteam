@@ -12,4 +12,6 @@ public interface EventService{
     Event assignEventTag(Long eventId, Long tagId);
 
     Page<Event> getAllEventsByTagId(Long tagId, Pageable pageable);
+
+    Event unassignEventTag(Long eventId, Long tagId);
 }

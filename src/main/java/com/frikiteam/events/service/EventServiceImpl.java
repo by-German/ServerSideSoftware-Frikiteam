@@ -81,4 +81,15 @@ public class EventServiceImpl implements EventService {
                 })
                 .orElseThrow(() -> new ResourceNotFoundException("Tag", "Id", tagId));
     }
+
+    @Override
+    public Event unassignEventTag(Long eventId, Long tagId) {
+        return tagRepository.findById(tagId)
+                .map(tag -> {
+                    Event event = eventRepository.findById(eventId)
+                            .orElseThrow(() -> new ResourceNotFoundException("Event", "Id", eventId));
+                    event.getTags().remove(tag);
+                    return eventRepository.save(event);
+                })
+                .orElseThrow(() -> new ResourceNotFoundException("Tag", "Id", tagId));    }
 }

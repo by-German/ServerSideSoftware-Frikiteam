@@ -33,6 +33,12 @@ public class EventTagsController {
         return mapper.map(eventService.assignEventTag(eventId, tagId), EventResource.class);
     }
 
+    @Operation(summary = "Unassign event to tag", tags = {"events-tags"})
+    @DeleteMapping("tags/{tagId}")
+    public EventResource unassignEventTag(@PathVariable Long eventId, @PathVariable Long tagId) {
+        return mapper.map(eventService.unassignEventTag(eventId, tagId), EventResource.class);
+    }
+
     @Operation(summary = "Get all tags by eventId", tags = {"events-tags"})
     @GetMapping("tags")
     public Page<TagResource> getAllTagsByEventId(@PathVariable Long eventId, Pageable pageable) {
