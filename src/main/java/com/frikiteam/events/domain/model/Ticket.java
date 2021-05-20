@@ -14,8 +14,6 @@ public class Ticket {
 
     private Double price;
 
-    private String lastName;
-
     private int docNumber;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -28,13 +26,6 @@ public class Ticket {
 
     //private Event event;
 
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
 
     public Long getId() {
         return id;
@@ -52,14 +43,6 @@ public class Ticket {
         this.price = price;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     public int getDocNumber() {
         return docNumber;
     }
@@ -75,23 +58,14 @@ public class Ticket {
     public void setOffer(Offer offer) {
         this.offer = offer;
     }
-    /*
-    public Event getEvent() {
-        return event;
+
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setEvent(Event event) {
-        this.event = event;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
-
-    public PaymentMethod getPaymentMethod() {
-        return paymentMethod;
-    }
-
-    public void setPaymentMethod(PaymentMethod paymentMethod) {
-        this.paymentMethod = paymentMethod;
-    }
-*/
 }
 
 

@@ -2,7 +2,7 @@ package com.frikiteam.events.domain.model;
 
 import javax.persistence.*;
 import javax.xml.stream.events.Comment;
-
+/*
 @Entity
 @Table(name = "events")
 public class Event {
@@ -23,3 +23,5 @@ public class Event {
     @ManyToMany
 
 }
+*/
+
