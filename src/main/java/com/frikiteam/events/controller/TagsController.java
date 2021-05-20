@@ -7,10 +7,8 @@ import com.frikiteam.events.resource.TagResource;
 import io.swagger.v3.oas.annotations.Operation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/tags")
@@ -27,4 +25,11 @@ public class TagsController {
         Tag tag = mapper.map(resource, Tag.class);
         return mapper.map(tagService.createTag(tag), TagResource.class);
     }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Delete a tag by Id", tags = {"tags"})
+    public ResponseEntity<?> deleteTag(@PathVariable Long id){
+        return tagService.deleteTag(id);
+    }
+
 }

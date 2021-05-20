@@ -78,17 +78,10 @@ public class EventTypesController {
         return convertToResource(eventTypeService.updateEventType(id, convertToEntity(resource)));
     }
 
-    @Operation(summary = "Update an Event Type", description = "Update an Event Type", tags = {"event types"})
-    @ApiResponse(
-            responseCode = "200",
-            description = "Update an Event Type",
-            content = @Content(mediaType = "application/json")
-    )
+
     private EventType convertToEntity(SaveEventTypeResource resource) {
         return mapper.map(resource, EventType.class);
     }
-
-
     private EventTypeResource convertToResource(EventType entity) {
         return mapper.map(entity, EventTypeResource.class);
     }
