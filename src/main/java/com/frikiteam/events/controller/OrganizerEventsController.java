@@ -35,6 +35,7 @@ public class OrganizerEventsController {
     }
 
     @PutMapping("/{eventId}")
+    @Operation(summary = "Update Event", description = "update data of event", tags = {"organizers-events"})
     public EventResource updateEvent
             (@PathVariable Long organizerId, @PathVariable Long eventId, @RequestBody SaveEventResource resource ) {
 

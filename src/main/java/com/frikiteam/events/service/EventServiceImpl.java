@@ -6,10 +6,16 @@ import com.frikiteam.events.domain.model.Place;
 import com.frikiteam.events.domain.repositories.EventRepository;
 import com.frikiteam.events.domain.repositories.OrganizerRepository;
 import com.frikiteam.events.domain.repositories.PlaceRepository;
+import com.frikiteam.events.domain.repositories.TagRepository;
 import com.frikiteam.events.domain.service.EventService;
 import com.frikiteam.events.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class EventServiceImpl implements EventService {
@@ -19,6 +25,8 @@ public class EventServiceImpl implements EventService {
     private OrganizerRepository organizerRepository;
     @Autowired
     private PlaceRepository placeRepository;
+    @Autowired
+    private TagRepository tagRepository;
 
     @Override
     public Event createEvent(Long organizerId, Long placeId, Event event) {
@@ -50,5 +58,27 @@ public class EventServiceImpl implements EventService {
                     return eventRepository.save(event1);
                 })
                 .orElseThrow(() -> new ResourceNotFoundException("Organizer", "Id", organizerId));
+    }
+
+    @Override
+    public Event assignEventTag(Long eventId, Long tagId) {
+        return tagRepository.findById(tagId)
+                .map(tag -> {
+                    Event event = eventRepository.findById(eventId)
+                            .orElseThrow(() -> new ResourceNotFoundException("Event", "Id", eventId));
+                    event.getTags().add(tag);
+                    return eventRepository.save(event);
+                })
+                .orElseThrow(() -> new ResourceNotFoundException("Tag", "Id", tagId));
+    }
+
+    @Override
+    public Page<Event> getAllEventsByTagId(Long tagId, Pageable pageable) {
+        return tagRepository.findById(tagId)
+                .map(tag -> {
+                    List<Event> events = tag.getEvents();
+                    return new PageImpl<>(events, pageable, events.size());
+                })
+                .orElseThrow(() -> new ResourceNotFoundException("Tag", "Id", tagId));
     }
 }
