@@ -1,6 +1,7 @@
 package com.frikiteam.events.service;
 
 import com.frikiteam.events.domain.model.District;
+import com.frikiteam.events.domain.repositories.CityRepository;
 import com.frikiteam.events.domain.repositories.DistrictRepository;
 import com.frikiteam.events.domain.service.IDistrictService;
 import com.frikiteam.events.exception.ResourceNotFoundException;
@@ -14,7 +15,8 @@ import org.springframework.stereotype.Service;
 public class DistrictServiceImplementation implements IDistrictService {
     @Autowired
     private DistrictRepository districtRepository;
-
+    @Autowired
+    private CityRepository cityRepository;
 
     @Override
     public District getDistrictById(Long districtId) {
@@ -23,8 +25,13 @@ public class DistrictServiceImplementation implements IDistrictService {
     }
 
     @Override
-    public District createDistrict(District district) {
-        return districtRepository.save(district);
+    public District createDistrict(Long cityId, District district) {
+        return cityRepository.findById(cityId)
+                .map(city -> {
+                    district.setCity(city);
+                    return districtRepository.save(district);
+                })
+                .orElseThrow(()-> new ResourceNotFoundException("City", "Id", cityId));
     }
 
     @Override

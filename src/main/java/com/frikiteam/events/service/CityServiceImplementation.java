@@ -26,8 +26,12 @@ public class CityServiceImplementation implements ICityService {
     }
 
     @Override
-    public City createCity(City city) {
-        return cityRepository.save(city);
+    public City createCity(Long countryId, City city) {
+        return countryRepository.findById(countryId)
+                .map(country -> {
+                    city.setCountry(country);
+                    return cityRepository.save(city);
+                }).orElseThrow(() -> new ResourceNotFoundException("Country", "Id", countryId));
     }
 
     @Override

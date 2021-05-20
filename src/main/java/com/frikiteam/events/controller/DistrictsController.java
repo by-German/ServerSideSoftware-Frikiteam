@@ -39,10 +39,10 @@ public class DistrictsController {
         return new PageImpl<>(resources,pageable,resources.size());
     }
 
-    @PostMapping("/districts")
-    public DistrictResource createDistrict(@Valid @RequestBody SaveDistrictResource resource){
+    @PostMapping("/cities/{cityId}/districts")
+    public DistrictResource createDistrict(@PathVariable Long cityId, @Valid @RequestBody SaveDistrictResource resource){
         District district = convertToEntity(resource);
-        return convertToResource(districtService.createDistrict(district));
+        return convertToResource(districtService.createDistrict(cityId, district));
     }
 
     @PutMapping("/districts/{districtId}")

@@ -40,10 +40,10 @@ public class PlacesController {
         return new PageImpl<>(resources,pageable,resources.size());
     }
 
-    @PostMapping("/places")
-    public PlaceResource createPlace(@Valid @RequestBody SavePlaceResource resource){
+    @PostMapping("/districts/{districtId}/places")
+    public PlaceResource createPlace(@PathVariable Long districtId, @Valid @RequestBody SavePlaceResource resource){
         Place place = convertToEntity(resource);
-        return convertToResource(placeService.createPlace(place));
+        return convertToResource(placeService.createPlace(districtId, place));
     }
 
     @PutMapping("/places/{placeId}")

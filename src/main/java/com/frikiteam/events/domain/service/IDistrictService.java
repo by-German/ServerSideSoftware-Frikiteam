@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 public interface IDistrictService {
     public District getDistrictById(Long districtId);
 
-    public District createDistrict(District district);
+    public District createDistrict(Long cityId, District district);
     public District updateDistrict(Long districtId, District requestDistrict);
     public ResponseEntity<?> deleteDistrict (Long districtId);
 

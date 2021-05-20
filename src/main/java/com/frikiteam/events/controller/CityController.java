@@ -39,10 +39,10 @@ public class CityController {
         return new PageImpl<>(resources,pageable,resources.size());
     }
 
-    @PostMapping("/cities")
-    public CityResource createCity(@Valid @RequestBody SaveCityResource resource){
+    @PostMapping("/countries/{countryId}/cities") // to see
+    public CityResource createCity(@PathVariable Long countryId, @Valid @RequestBody SaveCityResource resource){
         City city = convertToEntity(resource);
-        return convertToResource(cityService.createCity(city));
+        return convertToResource(cityService.createCity(countryId, city));
     }
 
     @PutMapping("/cities/{cityId}")

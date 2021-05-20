@@ -6,5 +6,5 @@ import lombok.Data;
 public class CityResource {
     private Long id;
     private String name;
-    private CountryResource countryResource;
+    private CountryResource country;
 }
