@@ -1,10 +1,15 @@
 package com.frikiteam.events.domain.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Data
+@NoArgsConstructor
 @Table(name = "comments")
 public class Comment {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,6 +21,9 @@ public class Comment {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Customer customer;
 
-    @ManyToMany(mappedBy = "comments")
-    private List<Event> events = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    private Event event;
+
+    public Comment(String comment) {
+    }
 }
