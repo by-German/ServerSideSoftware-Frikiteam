@@ -80,7 +80,7 @@ public class EventTypesController {
     }
 
     @PutMapping("/type-events/{typeId}/events/{eventId}")
-    @Operation(summary = "assign type event to event", tags = {"evet types"})
+    @Operation(summary = "assign type event to event", tags = {"event types"})
     public EventTypeResource assignTypeEventToEvent(@PathVariable Long typeId, @PathVariable Long eventId) {
         return convertToResource(eventTypeService.assignTypeEventToEvent(typeId, eventId));
     }
