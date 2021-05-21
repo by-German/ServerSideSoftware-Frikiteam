@@ -1,7 +1,9 @@
 package com.frikiteam.events.controller;
 
+import com.frikiteam.events.domain.model.Event;
 import com.frikiteam.events.domain.model.EventType;
 import com.frikiteam.events.domain.service.EventTypeService;
+import com.frikiteam.events.resource.EventResource;
 import com.frikiteam.events.resource.SaveEventTypeResource;
 import com.frikiteam.events.resource.EventTypeResource;
 import io.swagger.v3.oas.annotations.Operation;
@@ -66,7 +68,6 @@ public class EventTypesController {
         return convertToResource(eventTypeService.createEventType(convertToEntity(resource)));
     }
 
-
     @Operation(summary = "Update an Event Type", description = "Update an Event Type", tags = {"event types"})
     @ApiResponse(
             responseCode = "200",
@@ -78,6 +79,11 @@ public class EventTypesController {
         return convertToResource(eventTypeService.updateEventType(id, convertToEntity(resource)));
     }
 
+    @PutMapping("/type-events/{typeId}/events/{eventId}")
+    @Operation(summary = "assign type event to event", tags = {"evet types"})
+    public EventTypeResource assignTypeEventToEvent(@PathVariable Long typeId, @PathVariable Long eventId) {
+        return convertToResource(eventTypeService.assignTypeEventToEvent(typeId, eventId));
+    }
 
     private EventType convertToEntity(SaveEventTypeResource resource) {
         return mapper.map(resource, EventType.class);

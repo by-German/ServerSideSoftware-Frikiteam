@@ -1,6 +1,7 @@
 package com.frikiteam.events.service;
 
 import com.frikiteam.events.domain.model.EventType;
+import com.frikiteam.events.domain.repositories.EventRepository;
 import com.frikiteam.events.domain.repositories.EventTypeRepository;
 import com.frikiteam.events.domain.service.EventTypeService;
 import com.frikiteam.events.exception.ResourceNotFoundException;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Service;
 public class EventTypeServiceImpl implements EventTypeService {
     @Autowired
     private EventTypeRepository eventTypeRepository;
+    @Autowired
+    private EventRepository eventRepository;
 
 
     @Override
@@ -50,5 +53,18 @@ public class EventTypeServiceImpl implements EventTypeService {
                     return ResponseEntity.ok().build(); })
                 .orElseThrow(() -> new ResourceNotFoundException("EventType", "Id", eventTypeId));
 
+    }
+
+    @Override
+    public EventType assignTypeEventToEvent(Long typeId, Long eventId) {
+        return eventRepository.findById(eventId)
+                .map(event -> {
+                    EventType eventType = eventTypeRepository.findById(typeId)
+                            .orElseThrow(() -> new ResourceNotFoundException("EventType", "Id", typeId));
+                    event.setEventType(eventType);
+                    eventRepository.save(event);
+                    return eventType;
+                })
+                .orElseThrow(() -> new ResourceNotFoundException("Event", "Id", eventId));
     }
 }

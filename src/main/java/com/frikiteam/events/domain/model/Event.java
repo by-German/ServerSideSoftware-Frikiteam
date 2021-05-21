@@ -1,6 +1,7 @@
 package com.frikiteam.events.domain.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.security.AllPermission;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@NoArgsConstructor
 @Data
 @Table(name = "events")
 public class Event {
@@ -42,4 +44,11 @@ public class Event {
             joinColumns = {@JoinColumn(name = "event_id")},
             inverseJoinColumns = {@JoinColumn(name = "social_network_id")})
     private List<SocialNetwork> socialNetworks = new ArrayList<>();
+
+    public Event(String name, int quantity, Double price, String information) {
+        this.name = name;
+        this.quantity = quantity;
+        this.price = price;
+        this.information = information;
+    }
 }

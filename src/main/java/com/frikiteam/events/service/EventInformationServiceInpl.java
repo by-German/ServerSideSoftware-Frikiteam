@@ -1,7 +1,9 @@
 package com.frikiteam.events.service;
 
+import com.frikiteam.events.domain.model.Event;
 import com.frikiteam.events.domain.model.EventInformation;
 import com.frikiteam.events.domain.repositories.EventInformationRepository;
+import com.frikiteam.events.domain.repositories.EventRepository;
 import com.frikiteam.events.domain.service.EventInformationService;
 import com.frikiteam.events.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +15,11 @@ import java.util.ArrayList;
 @Service
 public class EventInformationServiceInpl implements EventInformationService {
     @Autowired
-    EventInformationRepository eventsInformationRepository;
+    private EventInformationRepository eventsInformationRepository;
+    @Autowired
+    private EventRepository eventRepository;
+
+
     @Override
     public ArrayList<EventInformation> getAllEventInformation(){
         return (ArrayList<EventInformation>) eventsInformationRepository.findAll();
@@ -50,4 +56,26 @@ public class EventInformationServiceInpl implements EventInformationService {
 
         return eventsInformationRepository.save(existed);
     }
+
+    @Override
+    public EventInformation getEventInformationByEventId(Long eventId) {
+
+        return eventRepository.findById(eventId)
+                .map(event -> event.getEventInformation())
+                .orElseThrow(() -> new ResourceNotFoundException("Event", "Id", eventId));
+    }
+
+    @Override
+    public EventInformation createEventInformation(Long eventId, EventInformation eventInformation) {
+        return eventRepository.findById(eventId)
+                .map(event -> {
+                    EventInformation result = eventsInformationRepository.save(eventInformation);
+                    event.setEventInformation(result);
+                    eventRepository.save(event);
+                    return result;
+                })
+                .orElseThrow(() -> new ResourceNotFoundException("Event", "Id", eventId));
+    }
+
+
 }
