@@ -14,6 +14,7 @@ public class EventQualification {
     private int startQuantity;
 
 
+    @ManyToOne()
     private Customer customer;
 
 
