@@ -18,4 +18,8 @@ public interface EventInformationService {
     public ArrayList<EventInformation> getAllEventInformation();
 
     public EventInformation updateEventInformation(Long id, EventInformation eventInformation);
+
+    EventInformation getEventInformationByEventId(Long eventId);
+
+    EventInformation createEventInformation(Long eventId, EventInformation eventInformation);
 }
