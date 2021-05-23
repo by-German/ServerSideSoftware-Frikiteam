@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 public interface IPlaceService {
     public Place getPlaceById(Long placeId);
 
-    public Place createPlace(Place place);
+    public Place createPlace(Long districtId, Place place);
     public Place updatePlace(Long placeId, Place requestPlace);
     public ResponseEntity<?> deletePlace (Long placeId);
 

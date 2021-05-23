@@ -4,6 +4,7 @@ import com.frikiteam.events.domain.model.District;
 import com.frikiteam.events.domain.service.IDistrictService;
 import com.frikiteam.events.resource.DistrictResource;
 import com.frikiteam.events.resource.SaveDistrictResource;
+import io.swagger.v3.oas.annotations.Operation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -32,6 +33,7 @@ public class DistrictsController {
     }
 
     @GetMapping("/districts")
+    @Operation(summary = "get all districts by pages", tags = {"districts"})
     public Page<DistrictResource> getAllDistricts(Pageable pageable){
         List<DistrictResource> resources = districtService.getAllDistricts(pageable)
                 .getContent().stream().map(this::convertToResource)
@@ -39,25 +41,29 @@ public class DistrictsController {
         return new PageImpl<>(resources,pageable,resources.size());
     }
 
-    @PostMapping("/districts")
-    public DistrictResource createDistrict(@Valid @RequestBody SaveDistrictResource resource){
+    @PostMapping("/cities/{cityId}/districts")
+    @Operation(summary = "create a district by a city id", tags = {"districts"})
+    public DistrictResource createDistrict(@PathVariable Long cityId, @Valid @RequestBody SaveDistrictResource resource){
         District district = convertToEntity(resource);
-        return convertToResource(districtService.createDistrict(district));
+        return convertToResource(districtService.createDistrict(cityId, district));
     }
 
     @PutMapping("/districts/{districtId}")
+    @Operation(summary = "update a district", tags = {"districts"})
     public DistrictResource updateDistrict(@PathVariable Long districtId,@RequestBody SaveDistrictResource resource){
         District district = convertToEntity(resource);
         return convertToResource(districtService.updateDistrict(districtId,district));
     }
 
     @DeleteMapping("/districts/{districtId}")
+    @Operation(summary = "delete a district", tags = {"districts"})
     public ResponseEntity<?> deleteDistrict(@PathVariable Long districtId)
     {
         return districtService.deleteDistrict(districtId);
     }
 
     @GetMapping("/districts/{districtId}")
+    @Operation(summary = "Get a district by id", tags = {"districts"})
     public DistrictResource getDistrictById(@PathVariable Long districtId){
         return convertToResource(districtService.getDistrictById(districtId));
     }

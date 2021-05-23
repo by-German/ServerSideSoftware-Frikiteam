@@ -1,6 +1,7 @@
 package com.frikiteam.events.service;
 
 import com.frikiteam.events.domain.model.Place;
+import com.frikiteam.events.domain.repositories.DistrictRepository;
 import com.frikiteam.events.domain.repositories.PlaceRepository;
 import com.frikiteam.events.domain.service.IPlaceService;
 import com.frikiteam.events.exception.ResourceNotFoundException;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Service;
 public class PlaceServiceImplementation implements IPlaceService {
     @Autowired
     private PlaceRepository placeRepository;
+    @Autowired
+    private DistrictRepository districtRepository;
 
     @Override
     public Place getPlaceById(Long placeId) {
@@ -22,8 +25,13 @@ public class PlaceServiceImplementation implements IPlaceService {
     }
 
     @Override
-    public Place createPlace(Place place) {
-        return placeRepository.save(place);
+    public Place createPlace(Long districtId, Place place) {
+        return districtRepository.findById(districtId)
+                .map(district -> {
+                    place.setDistrict(district);
+                    return placeRepository.save(place);
+                })
+                .orElseThrow(() -> new ResourceNotFoundException("District", "Id", districtId));
     }
 
     @Override

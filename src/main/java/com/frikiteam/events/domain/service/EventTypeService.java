@@ -11,4 +11,6 @@ public interface EventTypeService {
     EventType createEventType(EventType eventType);
     EventType updateEventType(Long eventTypeId, EventType eventTypeDetails);
     ResponseEntity<?> deleteEventType(Long eventTypeId);
+
+    EventType assignTypeEventToEvent(Long typeId, Long eventId);
 }

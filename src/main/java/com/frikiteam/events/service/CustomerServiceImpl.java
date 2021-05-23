@@ -48,7 +48,7 @@ public class CustomerServiceImpl implements CustomerService {
 
         existed.setFirstName(customer.getFirstName());
         existed.setLastName(customer.getLastName());
-        existed.setDirection(customer.getDirection());
+        existed.setDateBird(customer.getDateBird());
         existed.setEmail(customer.getEmail());
         existed.setPassword(customer.getPassword());
 
