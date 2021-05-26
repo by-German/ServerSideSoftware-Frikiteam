@@ -14,8 +14,14 @@ public class EventQualification {
     private int startQuantity;
 
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Customer customer;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    private Event event;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    private Ticket ticket;
 
 
     public Long getId() {
@@ -40,6 +46,22 @@ public class EventQualification {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
+    }
+
+    public Ticket getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(Ticket ticket) {
+        this.ticket = ticket;
     }
 
     public EventQualification(){}

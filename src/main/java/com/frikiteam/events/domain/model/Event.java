@@ -4,15 +4,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-<<<<<<< HEAD
 import java.security.AllPermission;
 import java.util.ArrayList;
 import java.util.List;
 
-=======
-import javax.xml.stream.events.Comment;
-/*
->>>>>>> c75cc8d7c38568f8905bc12958d496f768d16d83
 @Entity
 @NoArgsConstructor
 @Data
@@ -57,5 +52,5 @@ public class Event {
         this.information = information;
     }
 }
-*/
+
 
