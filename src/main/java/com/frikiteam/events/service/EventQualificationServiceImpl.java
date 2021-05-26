@@ -15,12 +15,12 @@ public class EventQualificationServiceImpl implements EventQualificationService 
     private EventQualificationRepository eventQualificationRepository;
 
     @Override
-    public EventQualification saveEventInformation(EventQualification eventQualification) {
+    public EventQualification saveEventQualification(EventQualification eventQualification) {
         return eventQualificationRepository.save(eventQualification);
     }
 
     @Override
-    public EventQualification getEventInformationById(Long id) {
+    public EventQualification getEventQualificationById(Long id) {
         return eventQualificationRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "EventQualification", "Id", id
@@ -28,7 +28,7 @@ public class EventQualificationServiceImpl implements EventQualificationService 
     }
 
     @Override
-    public ResponseEntity<?> deleteEventInformation(Long id) {
+    public ResponseEntity<?> deleteEventQualification(Long id) {
         EventQualification eventQualification = eventQualificationRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "EventQualification", "Id", id
