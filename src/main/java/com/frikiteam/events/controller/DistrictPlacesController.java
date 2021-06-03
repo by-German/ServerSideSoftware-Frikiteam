@@ -18,14 +18,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api")
-public class PlacesController {
+@RequestMapping("/api/districts/{districtId}/places")
+public class DistrictPlacesController {
     @Autowired
     private ModelMapper mapper;
     @Autowired
     private IPlaceService placeService;
 
-    //Conversiones
     private Place convertToEntity(SavePlaceResource resource){
         return mapper.map(resource,Place.class);
     }
@@ -33,8 +32,8 @@ public class PlacesController {
         return mapper.map(entity,PlaceResource.class);
     }
 
-    @GetMapping("/places")
-    @Operation(summary = "Get all places", tags = {"places"})
+    @GetMapping
+    @Operation(summary = "Get all places", tags = {"district-places"})
     public Page<PlaceResource> getAllPlaces(Pageable pageable){
         List<PlaceResource> resources = placeService.getAllPlaces(pageable)
                 .getContent().stream().map(this::convertToResource)
@@ -42,29 +41,29 @@ public class PlacesController {
         return new PageImpl<>(resources,pageable,resources.size());
     }
 
-    @PostMapping("/districts/{districtId}/places")
-    @Operation(summary = "create a place by a district id", tags = {"places"})
+    @PostMapping
+    @Operation(summary = "create a place by a district id", tags = {"district-places"})
     public PlaceResource createPlace(@PathVariable Long districtId, @Valid @RequestBody SavePlaceResource resource){
         Place place = convertToEntity(resource);
         return convertToResource(placeService.createPlace(districtId, place));
     }
 
-    @PutMapping("/places/{placeId}")
-    @Operation(summary = "update a place", tags = {"places"})
+    @PutMapping("{placeId}")
+    @Operation(summary = "update a place", tags = {"district-places"})
     public PlaceResource updatePlace(@PathVariable Long placeId,@RequestBody SavePlaceResource resource){
         Place place = convertToEntity(resource);
         return convertToResource(placeService.updatePlace(placeId,place));
     }
 
-    @DeleteMapping("/places/{placeId}")
-    @Operation(summary = "Delete a place", tags = {"places"})
+    @DeleteMapping("{placeId}")
+    @Operation(summary = "Delete a place", tags = {"district-places"})
     public ResponseEntity<?> deletePlace(@PathVariable Long placeId)
     {
         return placeService.deletePlace(placeId);
     }
 
-    @GetMapping("/places/{placeId}")
-    @Operation(summary = "Get a place by id", tags = {"places"})
+    @GetMapping("{placeId}")
+    @Operation(summary = "Get a place by id", tags = {"district-places"})
     public PlaceResource getPlaceById(@PathVariable Long placeId){
         return convertToResource(placeService.getPlaceById(placeId));
     }

@@ -18,13 +18,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api")
-public class DistrictsController {
+@RequestMapping("/api/cities/{cityId}/districts")
+public class CityDistrictsController {
     @Autowired
     private ModelMapper mapper;
     @Autowired
     private IDistrictService districtService;
-    //Conversiones
+
     private District convertToEntity(SaveDistrictResource resource){
         return mapper.map(resource,District.class);
     }
@@ -32,8 +32,8 @@ public class DistrictsController {
         return mapper.map(entity,DistrictResource.class);
     }
 
-    @GetMapping("/districts")
-    @Operation(summary = "get all districts by pages", tags = {"districts"})
+    @GetMapping
+    @Operation(summary = "get all districts by pages", tags = {"city-districts"})
     public Page<DistrictResource> getAllDistricts(Pageable pageable){
         List<DistrictResource> resources = districtService.getAllDistricts(pageable)
                 .getContent().stream().map(this::convertToResource)
@@ -41,29 +41,29 @@ public class DistrictsController {
         return new PageImpl<>(resources,pageable,resources.size());
     }
 
-    @PostMapping("/cities/{cityId}/districts")
-    @Operation(summary = "create a district by a city id", tags = {"districts"})
+    @PostMapping
+    @Operation(summary = "create a district by a city id", tags = {"city-districts"})
     public DistrictResource createDistrict(@PathVariable Long cityId, @Valid @RequestBody SaveDistrictResource resource){
         District district = convertToEntity(resource);
         return convertToResource(districtService.createDistrict(cityId, district));
     }
 
-    @PutMapping("/districts/{districtId}")
-    @Operation(summary = "update a district", tags = {"districts"})
+    @PutMapping("{districtId}")
+    @Operation(summary = "update a district", tags = {"city-districts"})
     public DistrictResource updateDistrict(@PathVariable Long districtId,@RequestBody SaveDistrictResource resource){
         District district = convertToEntity(resource);
         return convertToResource(districtService.updateDistrict(districtId,district));
     }
 
-    @DeleteMapping("/districts/{districtId}")
-    @Operation(summary = "delete a district", tags = {"districts"})
+    @DeleteMapping("{districtId}")
+    @Operation(summary = "delete a district", tags = {"city-districts"})
     public ResponseEntity<?> deleteDistrict(@PathVariable Long districtId)
     {
         return districtService.deleteDistrict(districtId);
     }
 
-    @GetMapping("/districts/{districtId}")
-    @Operation(summary = "Get a district by id", tags = {"districts"})
+    @GetMapping("{districtId}")
+    @Operation(summary = "Get a district by id", tags = {"city-districts"})
     public DistrictResource getDistrictById(@PathVariable Long districtId){
         return convertToResource(districtService.getDistrictById(districtId));
     }

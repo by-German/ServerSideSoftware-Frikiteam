@@ -18,13 +18,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api")
-public class CityController {
+@RequestMapping("/api/countries/{countryId}/cities")
+public class CountryCitiesController {
     @Autowired
     private ModelMapper mapper;
     @Autowired
     private ICityService cityService;
-    //Conversiones
+
     private City convertToEntity(SaveCityResource resource){
         return mapper.map(resource,City.class);
     }
@@ -32,8 +32,8 @@ public class CityController {
         return mapper.map(entity,CityResource.class);
     }
 
-    @GetMapping("/cities")
-    @Operation(summary = "Get all cities by pages", tags = {"cities"})
+    @GetMapping
+    @Operation(summary = "Get all cities by pages", tags = {"country-cities"})
     public Page<CityResource> getAllCities(Pageable pageable){
         List<CityResource> resources = cityService.getAllCities(pageable)
                 .getContent().stream().map(this::convertToResource)
@@ -41,29 +41,29 @@ public class CityController {
         return new PageImpl<>(resources,pageable,resources.size());
     }
 
-    @PostMapping("/countries/{countryId}/cities") // to see
-    @Operation(summary = "create a city by country id", tags = {"cities"})
+    @PostMapping
+    @Operation(summary = "create a city by country id", tags = {"country-cities"})
     public CityResource createCity(@PathVariable Long countryId, @Valid @RequestBody SaveCityResource resource){
         City city = convertToEntity(resource);
         return convertToResource(cityService.createCity(countryId, city));
     }
 
-    @PutMapping("/cities/{cityId}")
-    @Operation(summary = "update a city", tags = {"cities"})
+    @PutMapping("{cityId}")
+    @Operation(summary = "update a city", tags = {"country-cities"})
     public CityResource updateCity(@PathVariable Long cityId, @RequestBody SaveCityResource resource){
         City city = convertToEntity(resource);
         return convertToResource(cityService.updateCity(cityId,city));
     }
 
-    @DeleteMapping("/cities/{cityId}")
-    @Operation(summary = "delete a city", tags = {"cities"})
+    @DeleteMapping("{cityId}")
+    @Operation(summary = "delete a city", tags = {"country-cities"})
     public ResponseEntity<?> deleteCity(@PathVariable Long cityId)
     {
         return cityService.deleteCity(cityId);
     }
 
-    @GetMapping("/cities/{cityId}")
-    @Operation(summary = "Get a city by id", tags = {"cities"})
+    @GetMapping("{cityId}")
+    @Operation(summary = "Get a city by id", tags = {"country-cities"})
     public CityResource getCityById(@PathVariable Long cityId){
         return convertToResource(cityService.getCityById(cityId));
     }
