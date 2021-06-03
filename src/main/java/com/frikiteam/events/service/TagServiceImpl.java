@@ -47,4 +47,9 @@ public class TagServiceImpl implements TagService {
                 })
                 .orElseThrow(() -> new ResourceNotFoundException("Tag", "Id", id));
     }
+
+    @Override
+    public List<Tag> getAllTags() {
+        return tagRepository.findAll();
+    }
 }

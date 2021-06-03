@@ -6,5 +6,4 @@ import lombok.Data;
 public class TagResource {
     private Long id;
     private String name;
-    private String description;
 }

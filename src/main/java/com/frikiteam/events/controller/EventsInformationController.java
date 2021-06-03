@@ -10,20 +10,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/events/{eventId}")
+@RequestMapping("/api/events/{eventId}/information")
 public class EventsInformationController {
     @Autowired
     private ModelMapper mapper;
     @Autowired
     private EventInformationService eventInformationService;
 
-    @GetMapping("/information")
+    @GetMapping
     @Operation(summary = "get information of a event by event id", tags = {"events-information"})
     public EventInformationResource getEventInformationByEventId(@PathVariable Long eventId) {
-        return mapper.map(eventInformationService.getEventInformationByEventId(eventId), EventInformationResource.class);
+        return mapper.map
+                (eventInformationService.getEventInformationByEventId(eventId), EventInformationResource.class);
     }
 
-    @PostMapping("/information")
+    @PostMapping
     @Operation(summary = "create information for an event", tags = {"events-information"})
     public EventInformationResource createEventInformation
             (@PathVariable Long eventId, @RequestBody SaveEventInformationResource resource){

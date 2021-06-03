@@ -15,14 +15,12 @@ public class Tag {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String description;
 
     // relationship
     @ManyToMany(mappedBy = "tags")
     private List<Event> events = new ArrayList<>();
 
-    public Tag(String name, String description) {
+    public Tag(String name) {
         this.name = name;
-        this.description = description;
     }
 }

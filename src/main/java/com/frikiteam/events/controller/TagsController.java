@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("/api/tags")
 public class TagsController {
@@ -30,6 +33,15 @@ public class TagsController {
     @Operation(summary = "Delete a tag by Id", tags = {"tags"})
     public ResponseEntity<?> deleteTag(@PathVariable Long id){
         return tagService.deleteTag(id);
+    }
+
+    @GetMapping
+    @Operation(summary = "Get a list of All tags")
+    public List<TagResource> getAllTags() {
+        return  tagService.getAllTags()
+                .stream()
+                .map(tag -> mapper.map(tag, TagResource.class ))
+                .collect(Collectors.toList());
     }
 
 }
