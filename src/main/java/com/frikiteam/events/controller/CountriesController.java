@@ -43,7 +43,7 @@ public class CountriesController {
     }
 
     @PostMapping("/countries")
-    @Operation(summary = "create a country", tags = {"countsries"})
+    @Operation(summary = "create a country", tags = {"countries"})
     public CountryResource createCountry(@Valid @RequestBody SaveCountryResource resource){
         Country country = convertToEntity(resource);
         return convertToResource(countryService.createCountry(country));
