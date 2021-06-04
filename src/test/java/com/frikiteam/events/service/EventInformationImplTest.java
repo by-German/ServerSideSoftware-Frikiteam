@@ -4,6 +4,7 @@ package com.frikiteam.events.service;
 import com.frikiteam.events.domain.model.EventInformation;
 import com.frikiteam.events.domain.model.Organizer;
 import com.frikiteam.events.domain.repositories.EventInformationRepository;
+import com.frikiteam.events.domain.repositories.EventRepository;
 import com.frikiteam.events.domain.service.EventInformationService;
 import com.frikiteam.events.exception.ResourceNotFoundException;
 import org.junit.jupiter.api.Test;
@@ -23,7 +24,8 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
 public class EventInformationImplTest {
-
+    @MockBean
+    private EventRepository eventRepository;
     @MockBean
     private EventInformationRepository eventInformationRepository;
     @Autowired

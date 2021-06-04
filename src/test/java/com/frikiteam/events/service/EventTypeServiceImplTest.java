@@ -1,6 +1,7 @@
 package com.frikiteam.events.service;
 
 import com.frikiteam.events.domain.model.EventType;
+import com.frikiteam.events.domain.repositories.EventRepository;
 import com.frikiteam.events.domain.repositories.EventTypeRepository;
 import com.frikiteam.events.domain.service.EventTypeService;
 import com.frikiteam.events.exception.ResourceNotFoundException;
@@ -24,6 +25,8 @@ import static org.mockito.Mockito.when;
 public class EventTypeServiceImplTest {
     @MockBean
     private EventTypeRepository eventTypeRepository;
+    @MockBean
+    private EventRepository eventRepository;
 
     @Autowired
     private EventTypeService eventTypeService;

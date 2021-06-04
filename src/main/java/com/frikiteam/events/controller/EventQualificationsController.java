@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/events/{eventId}")
+@RequestMapping("/api")
 public class EventQualificationsController {
 
     @Autowired
@@ -23,17 +23,18 @@ public class EventQualificationsController {
     @PostMapping("/event_qualifications")
     @Operation(summary = "create qualification for an event", tags = {"events-qualification"})
     public EventQualificationResource saveEventQualification(@RequestBody SaveEventQualificationResource resource){
+        mapper.getConfiguration().setAmbiguityIgnored(true);
         EventQualification eventQualification = convertToEntity(resource);
         return convertToResource(_eventQualificationService.saveEventQualification(eventQualification));
     }
 
-    @GetMapping("/{eventQualificationId}")
+    @GetMapping("/event_qualifications/{id}")
     @Operation(summary = "get qualification of a event by id", tags = {"events-qualification"})
     public EventQualificationResource getEventQualificationById(@PathVariable Long id){
         return convertToResource(_eventQualificationService.getEventQualificationById(id));
     }
 
-    @DeleteMapping("/{eventQualificationId}")
+    @DeleteMapping("/event_qualifications/{id}")
     @Operation(summary = "delete a qualification of an event", tags = {"events-qualification"})
     public ResponseEntity<?> deleteEventQualification(@PathVariable Long id){
         return _eventQualificationService.deleteEventQualification(id);

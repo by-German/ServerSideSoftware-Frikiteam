@@ -10,9 +10,7 @@ public class EventQualification {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "start_quantity")
-    private int startQuantity;
-
+    private int starsQuantity;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Customer customer;
@@ -23,7 +21,6 @@ public class EventQualification {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Ticket ticket;
 
-
     public Long getId() {
         return id;
     }
@@ -32,12 +29,12 @@ public class EventQualification {
         this.id = id;
     }
 
-    public int getStartQuantity() {
-        return startQuantity;
+    public int getStarsQuantity() {
+        return starsQuantity;
     }
 
-    public void setStartQuantity(int startQuantity) {
-        this.startQuantity = startQuantity;
+    public void setStarsQuantity(int starsQuantity) {
+        this.starsQuantity = starsQuantity;
     }
 
     public Customer getCustomer() {
