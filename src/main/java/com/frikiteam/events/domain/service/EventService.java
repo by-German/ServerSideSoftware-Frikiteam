@@ -14,4 +14,6 @@ public interface EventService{
     Page<Event> getAllEventsByTagId(Long tagId, Pageable pageable);
 
     Event unassignEventTag(Long eventId, Long tagId);
+
+    Event getEventByName(String name);
 }

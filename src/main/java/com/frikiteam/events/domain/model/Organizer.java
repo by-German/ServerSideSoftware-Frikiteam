@@ -15,7 +15,7 @@ public class Organizer extends User{
     @Lob
     private String description;
 
-    private boolean verified;
+    private Boolean verified;
 
     private String logo;
 
@@ -27,12 +27,5 @@ public class Organizer extends User{
         this.description = description;
         this.verified = verified;
         this.logo = logo;
-    }
-
-    public boolean getVerified() {
-        return this.verified;
-    }
-    public void setVerified(boolean verified) {
-        this.verified = verified;
     }
 }

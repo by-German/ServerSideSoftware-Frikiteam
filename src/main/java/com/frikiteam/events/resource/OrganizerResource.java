@@ -8,6 +8,6 @@ import javax.persistence.Lob;
 @Data
 public class OrganizerResource extends User {
     private String description;
-    private boolean verified;
+    private Boolean verified;
     private String logo;
 }
