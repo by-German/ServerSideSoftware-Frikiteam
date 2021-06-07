@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 public class SaveOrganizerResource extends User {
     private String description;
-    private boolean verified;
+    private Boolean verified;
     private String logo;
 }
