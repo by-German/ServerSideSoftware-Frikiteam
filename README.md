@@ -1,7 +1,7 @@
 # Server Side Software - FRIKITEAM:
 
 ## Integrantes: 
-- Brayn German Mamani Rojas
+- Brayan German Mamani Rojas
 - Klaus Mollan Neyra
 - Aldair Cuarez
 - Rodrigo Calle Galdos
