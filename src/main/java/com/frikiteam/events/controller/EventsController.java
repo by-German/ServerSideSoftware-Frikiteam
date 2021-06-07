@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("api/events")
 public class EventsController {
@@ -22,6 +25,14 @@ public class EventsController {
     public EventResource getEventByName(@RequestParam String name) {
         Event event = eventService.getEventByName(name);
         return mapper.map(event, EventResource.class);
+    }
+
+    @GetMapping
+    public List<EventResource> getAllEvents() {
+        List<Event> events = eventService.getAllEvents();
+        return events.stream()
+                .map((event -> mapper.map(event, EventResource.class)))
+                .collect(Collectors.toList());
     }
 
 }

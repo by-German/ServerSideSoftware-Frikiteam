@@ -100,4 +100,9 @@ public class EventServiceImpl implements EventService {
             throw new ResourceNotFoundException("Event", "Name", name);
         return result;
     }
+
+    @Override
+    public List<Event> getAllEvents() {
+        return eventRepository.findAll();
+    }
 }
