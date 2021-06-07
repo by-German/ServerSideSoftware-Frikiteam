@@ -5,7 +5,13 @@ Feature: Search by event name
     When the user search the event with name "comic"
     Then the result is the event with name "comic"
 
-  Scenario: The user does not enter a name in the search.
+  Scenario: The user does not enter a name in the search
+    Given exist a event with name "comic" im a list of events
+    When the user search the event without to insert a name
+    Then a list of all events is displayed
+
+  Scenario: User enters name in search bar that has no matches
     Given the user wants to search for an event by name
-    When do not enter any name or text of the event
-    Then a list of the default events is displayed.
+    When enter the event name "asd"
+    And there are no matches with any system event
+    Then the message "No result found" is displayed

@@ -9,11 +9,20 @@ import io.cucumber.java.en.When;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class SearchByEventNameSteps {
     private final String url = "http://localhost:8080/api/";
     private final RestTemplate restTemplate = new RestTemplate();
-
     private String name;
+    private List<Event> events;
+    private String message;
+
+    /**
+     * Scenario 1
+     * */
 
     @Given("exist a event with name {string} im a list of events")
     public void existEventWith(String name) {
@@ -24,7 +33,6 @@ public class SearchByEventNameSteps {
             createEvent(name);
         }
     }
-
     @When("the user search the event with name {string}")
     public void userSearchTheEventWithName(String name) {
         // Action -> endpoint search event by name
@@ -32,11 +40,53 @@ public class SearchByEventNameSteps {
         if (result != null)
             this.name = result.getName();
     }
-
     @Then("the result is the event with name {string}")
     public void resultIsTheEventWithName(String name) {
         // Assert that the event is equals to result
         assert(this.name.equals(name));
+    }
+
+    /**
+     * Scenario 2
+     * */
+
+    @When("the user search the event without to insert a name")
+    public void userSearchTheEventWithoutToInsertName() {
+        try {
+            restTemplate.getForObject(url + "events/search?name="+ "", EventResource.class);
+        } catch (Exception e) {
+            events = restTemplate.getForObject(url + "events", List.class);
+        }
+    }
+    @Then("a list of all events is displayed")
+    public void ListOfAllEventsIsDisplayed() {
+        assertThat(events).isInstanceOf(List.class);
+        assert(events != null);
+    }
+
+    /**
+     * Scenario 3
+     * */
+
+    @Given("the user wants to search for an event by name")
+    public void userWantsToSearchForAnEventByName() {
+        existEventWith("comic");
+    }
+    @When("enter the event name {string}")
+    public void enterTheEventName(String name){
+        this.name = name;
+    }
+    @When("there are no matches with any system event")
+    public void thereAreNoMatchesWithAnySystemEvent() {
+        try {
+            restTemplate.getForObject(url + "events/search?name="+ this.name, EventResource.class);
+        } catch (Exception e) {
+            this.message = "No result found";
+        }
+    }
+    @Then("the message {string} is displayed")
+    public void messageIsDisplayed(String message) {
+        assert(this.message.equals(message));
     }
 
     private void createEvent(String name) {
