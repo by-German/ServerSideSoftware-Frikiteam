@@ -11,5 +11,5 @@ import java.util.GregorianCalendar;
 // min necessary for create a Customer
 @Data
 public class SaveCustomerResource extends User{
-    private GregorianCalendar dateBird;
+    private GregorianCalendar dateBirth;
 }

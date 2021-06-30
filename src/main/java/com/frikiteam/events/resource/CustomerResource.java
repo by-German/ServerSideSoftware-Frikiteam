@@ -7,5 +7,5 @@ import java.util.GregorianCalendar;
 
 @Data // between generate getters and setter for class super
 public class CustomerResource extends User {
-    private GregorianCalendar dateBird;
+    private GregorianCalendar dateBirth;
 }

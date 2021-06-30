@@ -62,7 +62,7 @@ public class OrganizersController {
             content = @Content(mediaType = "application/json")
     )
     @PostMapping("/organizers")
-    public OrganizerResource saveCustomer(@Valid @RequestBody SaveOrganizerResource resource) {
+    public OrganizerResource saveOrganizer(@Valid @RequestBody SaveOrganizerResource resource) {
         Organizer organizer = convertToEntity(resource);
         return convertToResource(organizerService.saveOrganizer(organizer));
     }
