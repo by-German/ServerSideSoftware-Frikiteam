@@ -6,7 +6,6 @@ import java.util.GregorianCalendar;
 
 @Data
 public class SaveEventResource {
-    private Long id;
     private String logo;
     private String information;
     private String name;
@@ -15,4 +14,6 @@ public class SaveEventResource {
     private Boolean verified;
     private GregorianCalendar startDate;
     private GregorianCalendar endDate;
+
+    private Long placeId;
 }

@@ -29,16 +29,12 @@ public class EventServiceImpl implements EventService {
     private TagRepository tagRepository;
 
     @Override
-    public Event createEvent(Long organizerId, Long placeId, Event event) {
+    public Event createEvent(Long organizerId, Event event) {
         Organizer organizer = organizerRepository.findById(organizerId)
                 .orElseThrow(() -> new ResourceNotFoundException("Organizer", "id", organizerId));
-        Place place = placeRepository.findById(placeId)
-                .orElseThrow(() -> new ResourceNotFoundException("Place", "id", placeId));
 
         // assign organizer to event
         event.setOrganizer(organizer);
-        // assign place to event
-        event.setPlace(place);
 
         return eventRepository.save(event);
     }

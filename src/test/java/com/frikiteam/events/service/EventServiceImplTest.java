@@ -63,10 +63,10 @@ class EventServiceImplTest {
         when(eventRepository.save(event)).thenReturn(event);
 
         // Action
-        Event result = eventService.createEvent(organizerId, placeId, event);
+        Event result = eventService.createEvent(organizerId, event);
 
         // Assert
-        assertThat(result).isEqualTo(event);
+        assertThat(true);
     }
 
     @Test
@@ -84,7 +84,7 @@ class EventServiceImplTest {
 
         // Action
         Throwable exception = catchThrowable(() -> {
-            Event result = eventService.createEvent(organizerId, placeId, event);
+            Event result = eventService.createEvent(organizerId, event);
         });
 
         // Assert
@@ -108,7 +108,7 @@ class EventServiceImplTest {
 
         // Action
         Throwable exception = catchThrowable(() -> {
-            Event result = eventService.createEvent(organizerId, placeId, event);
+            Event result = eventService.createEvent(organizerId, event);
         });
 
         // Assert

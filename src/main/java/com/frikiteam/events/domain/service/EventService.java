@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface EventService{
-    Event createEvent(Long organizerId, Long placeId, Event event);
+    Event createEvent(Long organizerId, Event event);
 
     Event updateEvent(Long organizerId, Long eventId, Event event);
 

@@ -25,13 +25,13 @@ public class OrganizerEventsController {
             description = "Event returned",
             content = @Content(mediaType = "application/json")
     )
-    @PostMapping("/places/{placeId}")
+    @PostMapping
     public EventResource createEvent
-            (@PathVariable Long organizerId, @PathVariable Long placeId,@RequestBody SaveEventResource resource) {
+            (@PathVariable Long organizerId, @RequestBody SaveEventResource resource) {
 
         // creation event for an organizer, at a place
         Event event = mapper.map(resource, Event.class);
-        return mapper.map(eventService.createEvent(organizerId, placeId, event), EventResource.class);
+        return mapper.map(eventService.createEvent(organizerId, event), EventResource.class);
     }
 
     @PutMapping("/{eventId}")
