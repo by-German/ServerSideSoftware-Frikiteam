@@ -6,6 +6,5 @@ import lombok.Data;
 public class SaveEventQualificationResource {
     private int starsQuantity;
     private Long customerId;
-    private Long eventId;
     private Long ticketId;
 }

@@ -1,14 +1,14 @@
 package com.frikiteam.events.domain.service;
 
 import com.frikiteam.events.domain.model.EventQualification;
-import com.frikiteam.events.resource.EventQualificationResource;
 import org.springframework.http.ResponseEntity;
 
-public interface EventQualificationService {
-    EventQualification saveEventQualification(EventQualification eventQualification);
+import java.util.List;
 
-    EventQualification getEventQualificationById(Long id);
+public interface EventQualificationService {
+    EventQualification saveEventQualification(Long eventId, EventQualification eventQualification);
 
     ResponseEntity<?> deleteEventQualification(Long id);
 
+    List<EventQualification> getEventQualificationByEventId(Long eventId);
 }

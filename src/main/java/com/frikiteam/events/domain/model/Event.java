@@ -44,6 +44,11 @@ public class Event {
             inverseJoinColumns = {@JoinColumn(name = "social_network_id")})
     private List<SocialNetwork> socialNetworks = new ArrayList<>();
 
+    // inverse relationships
+    @OneToMany(mappedBy = "event")
+    List<EventQualification> eventQualifications = new ArrayList<>();
+
+
     public Event(String name, int quantity, Double price, String information) {
         this.name = name;
         this.quantity = quantity;

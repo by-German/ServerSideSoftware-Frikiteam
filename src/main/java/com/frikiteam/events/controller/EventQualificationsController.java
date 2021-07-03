@@ -1,14 +1,19 @@
 package com.frikiteam.events.controller;
 
+import com.frikiteam.events.domain.model.Event;
 import com.frikiteam.events.domain.model.EventQualification;
 import com.frikiteam.events.domain.service.EventQualificationService;
 import com.frikiteam.events.resource.EventQualificationResource;
+import com.frikiteam.events.resource.EventResource;
 import com.frikiteam.events.resource.SaveEventQualificationResource;
 import io.swagger.v3.oas.annotations.Operation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
@@ -20,18 +25,22 @@ public class EventQualificationsController {
     @Autowired
     EventQualificationService _eventQualificationService;
 
-    @PostMapping("/event_qualifications")
+    @PostMapping("/event/{eventId}/qualifications")
     @Operation(summary = "create qualification for an event", tags = {"events-qualification"})
-    public EventQualificationResource saveEventQualification(@RequestBody SaveEventQualificationResource resource){
+    public EventQualificationResource saveEventQualification(@RequestParam Long eventId,  @RequestBody SaveEventQualificationResource resource){
         mapper.getConfiguration().setAmbiguityIgnored(true);
         EventQualification eventQualification = convertToEntity(resource);
-        return convertToResource(_eventQualificationService.saveEventQualification(eventQualification));
+        return convertToResource(_eventQualificationService.saveEventQualification(eventId, eventQualification));
     }
 
-    @GetMapping("/event_qualifications/{id}")
+    @GetMapping("/event/{eventId}/qualifications")
     @Operation(summary = "get qualification of a event by id", tags = {"events-qualification"})
-    public EventQualificationResource getEventQualificationById(@PathVariable Long id){
-        return convertToResource(_eventQualificationService.getEventQualificationById(id));
+    public List<EventQualificationResource> getEventQualificationById(@PathVariable Long eventId){
+        // TOTO: mapping
+        List<EventQualification> eventQualifications = _eventQualificationService.getEventQualificationByEventId(eventId);
+        return eventQualifications.stream()
+                .map(eventQualification -> mapper.map(eventQualification, EventQualificationResource.class))
+                .collect(Collectors.toList());
     }
 
     @DeleteMapping("/event_qualifications/{id}")
