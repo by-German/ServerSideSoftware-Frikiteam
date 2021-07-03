@@ -36,7 +36,6 @@ public class EventQualificationsController {
     @GetMapping("/event/{eventId}/qualifications")
     @Operation(summary = "get qualification of a event by id", tags = {"events-qualification"})
     public List<EventQualificationResource> getEventQualificationById(@PathVariable Long eventId){
-        // TOTO: mapping
         List<EventQualification> eventQualifications = _eventQualificationService.getEventQualificationByEventId(eventId);
         return eventQualifications.stream()
                 .map(eventQualification -> mapper.map(eventQualification, EventQualificationResource.class))

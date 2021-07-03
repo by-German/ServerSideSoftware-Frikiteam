@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class EventInformationServiceInpl implements EventInformationService {
@@ -49,19 +50,17 @@ public class EventInformationServiceInpl implements EventInformationService {
         EventInformation existed = eventsInformationRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("EventInformation", "id", id));
 
-            existed.setId(eventInformation.getId());
-            existed.setImage(eventInformation.getImage());
-            existed.setLink(eventInformation.getLink());
+            existed.setTitle(eventInformation.getTitle());
             existed.setDescription(eventInformation.getDescription());
+            existed.setImage(eventInformation.getImage());
 
         return eventsInformationRepository.save(existed);
     }
 
     @Override
-    public EventInformation getEventInformationByEventId(Long eventId) {
-
+    public List<EventInformation> getEventInformationByEventId(Long eventId) {
         return eventRepository.findById(eventId)
-                .map(event -> event.getEventInformation())
+                .map(Event::getEventInformations)
                 .orElseThrow(() -> new ResourceNotFoundException("Event", "Id", eventId));
     }
 
@@ -69,10 +68,8 @@ public class EventInformationServiceInpl implements EventInformationService {
     public EventInformation createEventInformation(Long eventId, EventInformation eventInformation) {
         return eventRepository.findById(eventId)
                 .map(event -> {
-                    EventInformation result = eventsInformationRepository.save(eventInformation);
-                    event.setEventInformation(result);
-                    eventRepository.save(event);
-                    return result;
+                    eventInformation.setEvent(event);
+                    return eventsInformationRepository.save(eventInformation);
                 })
                 .orElseThrow(() -> new ResourceNotFoundException("Event", "Id", eventId));
     }

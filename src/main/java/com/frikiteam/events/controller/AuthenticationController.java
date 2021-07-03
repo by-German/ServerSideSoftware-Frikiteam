@@ -1,5 +1,7 @@
 package com.frikiteam.events.controller;
 
+import com.frikiteam.events.domain.model.User;
+import com.frikiteam.events.domain.repositories.UserRepository;
 import com.frikiteam.events.domain.service.DefaultUserDetailsService;
 import com.frikiteam.events.service.communication.AuthenticationRequest;
 import com.frikiteam.events.service.communication.AuthenticationResponse;
@@ -25,17 +27,18 @@ public class AuthenticationController {
     private JwtCenter tokenCenter;
     @Autowired
     private DefaultUserDetailsService userDetailsService;
+    @Autowired
+    private UserRepository userRepository;
 
     @PostMapping("/sign-in")
     public ResponseEntity<?> register(@RequestBody AuthenticationRequest request) throws Exception {
         authenticate(request.getUsername(), request.getPassword());
 
         final UserDetails userDetails = userDetailsService.loadUserByUsername(request.getUsername());
-        System.out.println("Password: " + request.getPassword());
-
+        User user = userRepository.findByEmail(request.getUsername());
         String token = tokenCenter.generateToken(userDetails);
 
-        return ResponseEntity.ok(new AuthenticationResponse(userDetails.getUsername(), token));
+        return ResponseEntity.ok(new AuthenticationResponse(userDetails.getUsername(), token, user.getId()));
     }
 
     private void authenticate(String username, String password) throws Exception {

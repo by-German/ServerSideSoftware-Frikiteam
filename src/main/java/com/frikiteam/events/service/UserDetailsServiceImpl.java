@@ -28,7 +28,6 @@ public class UserDetailsServiceImpl implements DefaultUserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         com.frikiteam.events.domain.model.User user = userRepository.findByEmail(username);
         if (user != null) {
-            System.out.println(user.getFirstName());
             String passwordEncode = passwordEncoder.encode(user.getPassword());
             return new User(user.getEmail(), passwordEncode, DEFAULT_AUTHORITIES);
         }

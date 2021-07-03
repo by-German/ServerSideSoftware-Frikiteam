@@ -2,15 +2,21 @@ package com.frikiteam.events.resource;
 
 import lombok.Data;
 
+import java.util.GregorianCalendar;
+
 @Data
 public class EventResource {
     private Long id;
-    private String name;
-    private int quantity;
-    private Double price;
+    private String logo;
     private String information;
-    private OrganizerResource organizer;
-    private EventTypeResource eventType;
-    private PlaceResource place;
-    private EventInformationResource eventInformation;
+    private String name;
+    private Double price;
+    private int quantity;
+    private Boolean verified;
+    private GregorianCalendar startDate;
+    private GregorianCalendar endDate;
+
+    private Long eventTypeId;
+    private Long OrganizerId;
+    private Long PlaceId;
 }

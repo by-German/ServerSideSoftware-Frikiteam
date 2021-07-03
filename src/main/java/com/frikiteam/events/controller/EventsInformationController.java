@@ -1,13 +1,18 @@
 package com.frikiteam.events.controller;
 
 import com.frikiteam.events.domain.model.EventInformation;
+import com.frikiteam.events.domain.model.EventQualification;
 import com.frikiteam.events.domain.service.EventInformationService;
 import com.frikiteam.events.resource.EventInformationResource;
+import com.frikiteam.events.resource.EventQualificationResource;
 import com.frikiteam.events.resource.SaveEventInformationResource;
 import io.swagger.v3.oas.annotations.Operation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/events/{eventId}/information")
@@ -19,9 +24,11 @@ public class EventsInformationController {
 
     @GetMapping
     @Operation(summary = "get information of a event by event id", tags = {"events-information"})
-    public EventInformationResource getEventInformationByEventId(@PathVariable Long eventId) {
-        return mapper.map
-                (eventInformationService.getEventInformationByEventId(eventId), EventInformationResource.class);
+    public List<EventInformationResource> getEventInformationByEventId(@PathVariable Long eventId) {
+        List<EventInformation> informations = eventInformationService.getEventInformationByEventId(eventId);
+        return informations.stream()
+                .map(eventInformation -> mapper.map(eventInformation, EventInformationResource.class))
+                .collect(Collectors.toList());
     }
 
     @PostMapping

@@ -4,6 +4,7 @@ import com.frikiteam.events.domain.model.EventInformation;
 import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -19,7 +20,7 @@ public interface EventInformationService {
 
     public EventInformation updateEventInformation(Long id, EventInformation eventInformation);
 
-    EventInformation getEventInformationByEventId(Long eventId);
+    List<EventInformation> getEventInformationByEventId(Long eventId);
 
     EventInformation createEventInformation(Long eventId, EventInformation eventInformation);
 }

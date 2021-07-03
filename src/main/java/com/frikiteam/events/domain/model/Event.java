@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 @Entity
@@ -14,10 +15,14 @@ import java.util.List;
 public class Event {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private int quantity;
-    private Double price;
+    private String logo;
     private String information;
+    private String name;
+    private Double price;
+    private int quantity;
+    private Boolean verified;
+    private GregorianCalendar startDate;
+    private GregorianCalendar endDate;
 
     // relationship
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -29,8 +34,8 @@ public class Event {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Place place;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private EventInformation eventInformation;
+    @OneToMany(mappedBy = "event")
+    private List<EventInformation> eventInformations = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "events_tags",
@@ -49,10 +54,13 @@ public class Event {
     List<EventQualification> eventQualifications = new ArrayList<>();
 
 
-    public Event(String name, int quantity, Double price, String information) {
+    public Event(String name, int quantity, Double price, String information, Boolean verified, GregorianCalendar startDate, GregorianCalendar endDate) {
         this.name = name;
         this.quantity = quantity;
         this.price = price;
         this.information = information;
+        this.verified = verified;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 }

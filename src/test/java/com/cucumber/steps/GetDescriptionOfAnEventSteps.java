@@ -82,7 +82,7 @@ public class GetDescriptionOfAnEventSteps {
 
     @Then("basic information about the event is appreciated")
     public void getDescription() {
-        System.out.println(event.getEventInformation());
+        System.out.println(event.getInformation());
     }
 
 }

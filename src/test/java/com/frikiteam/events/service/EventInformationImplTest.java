@@ -48,7 +48,6 @@ public class EventInformationImplTest {
         eventInformation.setId(id);
         eventInformation.setDescription("Event about the best films");
         eventInformation.setImage("Favorite Images");
-        eventInformation.setLink("Link");
 
 
         when(eventInformationRepository.findById(id)).thenReturn(Optional.of(eventInformation));
@@ -110,7 +109,6 @@ public class EventInformationImplTest {
         eventInformation.setId(id);
         eventInformation.setDescription("Event about the best films");
         eventInformation.setImage("Favorite Images");
-        eventInformation.setLink("Link");
 
         when(eventInformationRepository.findById(id)).thenReturn(Optional.of(eventInformation));
 
@@ -128,7 +126,6 @@ public class EventInformationImplTest {
         eventInformation.setId(1L);
         eventInformation.setDescription("Event about the best films");
         eventInformation.setImage("Favorite Images");
-        eventInformation.setLink("Link");
 
         when(eventInformationRepository.save(eventInformation)).thenReturn(eventInformation);
 
@@ -148,7 +145,6 @@ public class EventInformationImplTest {
         updateInformation.setId(id);
         updateInformation.setDescription("Event about the best films");
         updateInformation.setImage("Favorite Images");
-        updateInformation.setLink("Link");
 
         EventInformation oldInformation = new EventInformation();
 
@@ -156,7 +152,6 @@ public class EventInformationImplTest {
         oldInformation.setId(id1);
         oldInformation.setDescription("Event about the oldest films");
         oldInformation.setImage("Favorite old Images");
-        oldInformation.setLink("Link old");
 
         when(eventInformationRepository.findById(id)).thenReturn(Optional.of(oldInformation));
         when(eventInformationRepository.save(updateInformation)).thenReturn(updateInformation);
@@ -178,7 +173,6 @@ public class EventInformationImplTest {
         updateInformation.setId(id);
         updateInformation.setDescription("Event about the best films");
         updateInformation.setImage("Favorite Images");
-        updateInformation.setLink("Link");
 
         when(eventInformationRepository.findById(id)).thenReturn(Optional.empty());
         when(eventInformationRepository.save(updateInformation)).thenReturn(updateInformation);
