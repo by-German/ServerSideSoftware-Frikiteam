@@ -20,4 +20,6 @@ public interface EventService{
     Event getEventByName(String name);
 
     List<Event> getAllEvents();
+
+    Event getEventById(Long id);
 }

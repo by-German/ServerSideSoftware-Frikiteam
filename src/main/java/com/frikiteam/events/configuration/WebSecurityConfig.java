@@ -55,8 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         String[] permits = new String[] {
                 "/api/auth/*",
-                "/api/organizers/*",
-                "/api/organizers"
+                "/**" /*all methods permits*/
         };
 
         httpSecurity.csrf().disable()
