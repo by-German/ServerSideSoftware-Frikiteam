@@ -11,4 +11,8 @@ public interface OrganizerService {
     Organizer saveOrganizer(Organizer organizer);
     ResponseEntity<?> deleteOrganizer(Long id);
     Organizer updateOrganizer(Long id, Organizer organizer);
+
+    Page<Organizer> getAllByCustomerId(Long customerId, Pageable pageable);
+    Organizer assignCustomer(Long customerId, Long organizerId);
+    Organizer unnassignCustomer(Long customerId, Long organizerId);
 }

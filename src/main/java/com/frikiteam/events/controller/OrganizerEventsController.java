@@ -9,7 +9,13 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/organizers/{organizerId}/events")
@@ -18,6 +24,7 @@ public class OrganizerEventsController {
     private EventService eventService;
     @Autowired
     private ModelMapper mapper;
+
 
     @Operation(summary = "Create Event", description = "creation of an event by an organizer, at a place", tags = {"organizers-events"})
     @ApiResponse(
@@ -43,4 +50,15 @@ public class OrganizerEventsController {
         return mapper.map(eventService.updateEvent(organizerId, eventId, event), EventResource.class);
     }
 
+    @GetMapping
+    @Operation(summary = "Get all events of an Organizer", tags = {"organizers-events"})
+    public Page<EventResource> getAllEventsByOrganizerId(@PathVariable Long organizerId, Pageable pageable) {
+        Page<Event> eventsPage = eventService.getAllEventsByOrganizerId(organizerId, pageable);
+        List<EventResource> resources = eventsPage.getContent()
+                .stream()
+                .map(event -> mapper.map(event, EventResource.class))
+                .collect(Collectors.toList());
+        return new PageImpl<>(resources, pageable, resources.size());
+
+    }
 }

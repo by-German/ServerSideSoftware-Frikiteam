@@ -22,6 +22,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
+// Decrecated
 @RestController
 @RequestMapping("/api")
 public class EventTypesController {

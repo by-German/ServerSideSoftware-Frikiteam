@@ -110,7 +110,7 @@ class CommentServiceImplTest {
         Comment comment = new Comment();
         comment.setId(1L);
         comment.setEvent(event);
-        comment.setCustomer(customer);
+        comment.setUser(customer);
 
         when(customerRepository.findById(userId)).thenReturn(Optional.of(customer));
         when(eventRepository.findById(eventId)).thenReturn(Optional.of(event));
@@ -135,7 +135,7 @@ class CommentServiceImplTest {
         Comment comment = new Comment();
         comment.setId(1L);
         comment.setEvent(event);
-        comment.setCustomer(customer);
+        comment.setUser(customer);
 
         when(customerRepository.findById(userId)).thenReturn(Optional.of(customer));
         when(eventRepository.findById(eventId)).thenReturn(Optional.empty());
@@ -164,7 +164,7 @@ class CommentServiceImplTest {
         Comment comment = new Comment();
         comment.setId(1L);
         comment.setEvent(event);
-        comment.setCustomer(customer);
+        comment.setUser(customer);
 
         when(customerRepository.findById(userId)).thenReturn(Optional.empty());
         when(eventRepository.findById(eventId)).thenReturn(Optional.of(event));

@@ -15,6 +15,8 @@ public interface EventService{
 
     Page<Event> getAllEventsByTagId(Long tagId, Pageable pageable);
 
+    Page<Event> getAllEventsByOrganizerId(Long organizerId, Pageable pageable);
+
     Event unassignEventTag(Long eventId, Long tagId);
 
     Event getEventByName(String name);
@@ -22,4 +24,10 @@ public interface EventService{
     List<Event> getAllEvents();
 
     Event getEventById(Long id);
+
+    Page<Event> getAllEventsByCustomerId(Long customerId, Pageable pageable);
+
+    Event assignCustomerEvent(Long customerId, Long eventId);
+
+    Event unnassignCustomerEvent(Long customerId, Long eventId);
 }

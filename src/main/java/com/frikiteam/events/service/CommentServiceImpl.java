@@ -2,9 +2,11 @@ package com.frikiteam.events.service;
 
 import com.frikiteam.events.domain.model.Comment;
 import com.frikiteam.events.domain.model.Customer;
+import com.frikiteam.events.domain.model.User;
 import com.frikiteam.events.domain.repositories.CommentRepository;
 import com.frikiteam.events.domain.repositories.CustomerRepository;
 import com.frikiteam.events.domain.repositories.EventRepository;
+import com.frikiteam.events.domain.repositories.UserRepository;
 import com.frikiteam.events.domain.service.CommentService;
 import com.frikiteam.events.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +25,7 @@ public class CommentServiceImpl implements CommentService {
     @Autowired
     private EventRepository eventRepository;
     @Autowired
-    private CustomerRepository customerRepository;
+    private UserRepository userRepository;
 
     @Override
     public Page<Comment> getAllCommentsByEventId(Long eventId, Pageable pageable) {
@@ -40,13 +42,13 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public Comment createComment(Long eventId, Long userId, Comment comment) {
-        Customer customer = customerRepository.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("Customer", "Id", userId));
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User", "Id", userId));
 
         return eventRepository.findById(eventId)
                 .map(event -> {
                     comment.setEvent(event);
-                    comment.setCustomer(customer);
+                    comment.setUser(user);
                     return commentRepository.save(comment);
                 })
                 .orElseThrow(() -> new ResourceNotFoundException("Event", "Id", eventId));

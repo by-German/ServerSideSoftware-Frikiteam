@@ -1,6 +1,7 @@
 package com.frikiteam.events.domain.service;
 
 import com.frikiteam.events.domain.model.Customer;
+import com.frikiteam.events.domain.model.Event;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;

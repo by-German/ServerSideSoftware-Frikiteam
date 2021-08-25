@@ -17,7 +17,7 @@ public class Comment {
 
     // relationship
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    private Customer customer;
+    private User user;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Event event;

@@ -36,7 +36,7 @@ public class TagsController {
     }
 
     @GetMapping
-    @Operation(summary = "Get a list of All tags")
+    @Operation(summary = "Get a list of All tags", tags = {"tags"})
     public List<TagResource> getAllTags() {
         return  tagService.getAllTags()
                 .stream()

@@ -24,7 +24,7 @@ public class Event {
     private GregorianCalendar startDate;
     private GregorianCalendar endDate;
 
-    // relationship
+    // relationships
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Organizer organizer;
 
@@ -52,6 +52,12 @@ public class Event {
     // inverse relationships
     @OneToMany(mappedBy = "event")
     List<EventQualification> eventQualifications = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "events")
+    private List<Customer> customers = new ArrayList<>();
+
+    @OneToMany(mappedBy = "event")
+    List<Itinerary> itineraries = new ArrayList<>();
 
 
     public Event(String name, int quantity, Double price, String information, Boolean verified, GregorianCalendar startDate, GregorianCalendar endDate) {
