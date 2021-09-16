@@ -100,11 +100,8 @@ public class EventServiceImpl implements EventService {
                 .orElseThrow(() -> new ResourceNotFoundException("Tag", "Id", tagId));    }
 
     @Override
-    public Event getEventByName(String name) {
-        Event result = eventRepository.findByName(name);
-        if (result == null)
-            throw new ResourceNotFoundException("Event", "Name", name);
-        return result;
+    public List<Event> getEventByName(String name) {
+        return eventRepository.findByName(name);
     }
 
     @Override

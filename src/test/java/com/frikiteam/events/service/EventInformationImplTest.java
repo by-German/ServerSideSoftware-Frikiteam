@@ -138,17 +138,14 @@ public class EventInformationImplTest {
     @Test
     public void whenUpdateEventInformationWithValidIdThenReturnsEventInformationUpdated() {
         // Arrange
-        long id = 1, id1 = 13L;
+        long id = 1, id1 = 1;
 
         EventInformation updateInformation = new EventInformation();
-
         updateInformation.setId(id);
         updateInformation.setDescription("Event about the best films");
         updateInformation.setImage("Favorite Images");
 
         EventInformation oldInformation = new EventInformation();
-
-
         oldInformation.setId(id1);
         oldInformation.setDescription("Event about the oldest films");
         oldInformation.setImage("Favorite old Images");

@@ -25,8 +25,9 @@ public class GetDescriptionOfAnEventSteps {
         resource.setInformation("Only geeks");
         resource.setPrice(25.0);
         resource.setQuantity(3500);
+        resource.setPlaceId(1L);
 
-        event = restTemplate.postForObject(url + "organizers/1/events/places/1", resource, EventResource.class);
+        event = restTemplate.postForObject(url + "organizers/1/events", resource, EventResource.class);
 
     }
 

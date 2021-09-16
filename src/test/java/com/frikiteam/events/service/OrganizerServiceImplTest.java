@@ -1,6 +1,7 @@
 package com.frikiteam.events.service;
 
 import com.frikiteam.events.domain.model.Organizer;
+import com.frikiteam.events.domain.repositories.CustomerRepository;
 import com.frikiteam.events.domain.repositories.OrganizerRepository;
 import com.frikiteam.events.domain.service.OrganizerService;
 import com.frikiteam.events.exception.ResourceNotFoundException;
@@ -25,6 +26,9 @@ import static org.mockito.Mockito.when;
 class OrganizerServiceImplTest {
     @MockBean
     private OrganizerRepository organizerRepository;
+    @MockBean
+    private CustomerRepository customerRepository;
+
     @Autowired
     private OrganizerService organizerService;
 

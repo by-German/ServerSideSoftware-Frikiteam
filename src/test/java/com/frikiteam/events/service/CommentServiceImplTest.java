@@ -6,6 +6,7 @@ import com.frikiteam.events.domain.model.Event;
 import com.frikiteam.events.domain.repositories.CommentRepository;
 import com.frikiteam.events.domain.repositories.CustomerRepository;
 import com.frikiteam.events.domain.repositories.EventRepository;
+import com.frikiteam.events.domain.repositories.UserRepository;
 import com.frikiteam.events.domain.service.CommentService;
 import com.frikiteam.events.domain.service.CustomerService;
 import com.frikiteam.events.exception.ResourceNotFoundException;
@@ -35,7 +36,7 @@ class CommentServiceImplTest {
     @MockBean
     private EventRepository eventRepository;
     @MockBean
-    private CustomerRepository customerRepository;
+    private UserRepository userRepository;
 
     @Autowired
     private CommentService commentService;
@@ -112,7 +113,7 @@ class CommentServiceImplTest {
         comment.setEvent(event);
         comment.setUser(customer);
 
-        when(customerRepository.findById(userId)).thenReturn(Optional.of(customer));
+        when(userRepository.findById(userId)).thenReturn(Optional.of(customer));
         when(eventRepository.findById(eventId)).thenReturn(Optional.of(event));
         when(commentRepository.save(comment)).thenReturn(comment);
 
@@ -137,7 +138,7 @@ class CommentServiceImplTest {
         comment.setEvent(event);
         comment.setUser(customer);
 
-        when(customerRepository.findById(userId)).thenReturn(Optional.of(customer));
+        when(userRepository.findById(userId)).thenReturn(Optional.of(customer));
         when(eventRepository.findById(eventId)).thenReturn(Optional.empty());
         when(commentRepository.save(comment)).thenReturn(comment);
 
@@ -166,7 +167,7 @@ class CommentServiceImplTest {
         comment.setEvent(event);
         comment.setUser(customer);
 
-        when(customerRepository.findById(userId)).thenReturn(Optional.empty());
+        when(userRepository.findById(userId)).thenReturn(Optional.empty());
         when(eventRepository.findById(eventId)).thenReturn(Optional.of(event));
         when(commentRepository.save(comment)).thenReturn(comment);
 
@@ -178,6 +179,6 @@ class CommentServiceImplTest {
         // Assert
         assertThat(exception)
                 .isInstanceOf(ResourceNotFoundException.class)
-                .hasMessage("Resource Customer not found for Id with value 1");
+                .hasMessage("Resource User not found for Id with value 1");
     }
 }

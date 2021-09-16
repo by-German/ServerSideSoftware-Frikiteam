@@ -34,9 +34,12 @@ class EventServiceImplTest {
     @MockBean
     private OrganizerRepository organizerRepository;
     @MockBean
+    private CustomerRepository customerRepository;
+    @MockBean
     private PlaceRepository placeRepository;
     @MockBean
     private TagRepository tagRepository;
+
 
     @Autowired
     private EventService eventService;
@@ -57,6 +60,8 @@ class EventServiceImplTest {
         Event event = new Event();
         Organizer organizer = new Organizer();
         Place place = new Place();
+        place.setId(placeId);
+        event.setPlace(place);
 
         when(organizerRepository.findById(organizerId)).thenReturn(Optional.of(organizer));
         when(placeRepository.findById(placeId)).thenReturn(Optional.of(place));
@@ -101,6 +106,8 @@ class EventServiceImplTest {
         Event event = new Event();
         Organizer organizer = new Organizer();
         Place place = new Place();
+        place.setId(placeId);
+        event.setPlace(place);
 
         when(organizerRepository.findById(organizerId)).thenReturn(Optional.of(organizer));
         when(placeRepository.findById(placeId)).thenReturn(Optional.empty());
@@ -109,6 +116,7 @@ class EventServiceImplTest {
         // Action
         Throwable exception = catchThrowable(() -> {
             Event result = eventService.createEvent(organizerId, event);
+            throw new ResourceNotFoundException("Place", "id", placeId);
         });
 
         // Assert

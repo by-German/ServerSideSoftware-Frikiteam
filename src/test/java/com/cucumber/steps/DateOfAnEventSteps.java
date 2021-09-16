@@ -8,10 +8,12 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.java8.Da;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Date;
+import java.util.List;
 
 public class DateOfAnEventSteps {
     private final String url = "http://localhost:8080/api/";
@@ -21,9 +23,8 @@ public class DateOfAnEventSteps {
     @Given("the user1 is in the event list")
     public void userIsInTheEventList() {
         try {
-
-            restTemplate.getForObject(url + "events/1/information", Event.class);
-            //restTemplate.getForObject(url + "/api/events/{eventId}/information1", Event.class);
+            // exist information for event with id 1
+            restTemplate.getForObject(url + "events/1/information", EventInformationResource[].class);
         } catch (HttpClientErrorException e) {
             createEvent();
             createEventInformation();
@@ -33,9 +34,8 @@ public class DateOfAnEventSteps {
 
     @When("viewing one event")
     public void viewingOneEvent() {
-        EventInformationResource result = restTemplate.getForObject(url + "events/1/information" , EventInformationResource.class);
-        event = result;
-        assert(true);
+        ResponseEntity<EventInformationResource[]> responses =  restTemplate.getForEntity(url + "events/1/information" , EventInformationResource[].class);
+        System.out.println(responses);
     }
 
     @Then("the system indicates show the date")
@@ -50,7 +50,8 @@ public class DateOfAnEventSteps {
         SaveEventResource resource = new SaveEventResource();
         resource.setName("bou");
         resource.setInformation("best event!");
-        restTemplate.postForObject(url + "organizers/1/events/places/1", resource, EventResource.class);
+        resource.setPlaceId(1L);
+        restTemplate.postForObject(url + "organizers/1/events", resource, EventResource.class);
     }
 
     private void createPlace() {
@@ -99,14 +100,13 @@ public class DateOfAnEventSteps {
 
     private void createEventInformation(){
         try {
-            restTemplate.getForObject(url + "events/1/information/1", EventInformationResource.class);
+            restTemplate.getForObject(url + "events/1/information", EventInformationResource[].class);
         } catch (HttpClientErrorException e){
-            SaveEventInformationResource event_i = new SaveEventInformationResource();
-//            event_i.setEventDescription("new topic");
-//            event_i.setEventImage("new image");
-//            event_i.setEventLink("https/new.com");
-//            event_i.setStartDate(new Date(2021-05-19));
-            restTemplate.postForObject(url + "events/1/information", event_i, EventInformationResource.class);
+            SaveEventInformationResource information = new SaveEventInformationResource();
+            information.setDescription("new topic");
+            information.setImage("new image");
+            information.setTitle("new title");
+            restTemplate.postForObject(url + "events/1/information", information, EventInformationResource[].class);
         }
     }
 

@@ -9,15 +9,17 @@ import io.cucumber.java.en.When;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.contentOf;
 
 public class SearchByEventNameSteps {
     private final String url = "http://localhost:8080/api/";
     private final RestTemplate restTemplate = new RestTemplate();
     private String name;
-    private List<Event> events;
+    private EventResource[] events;
     private String message;
 
     /**
@@ -28,7 +30,7 @@ public class SearchByEventNameSteps {
     public void existEventWith(String name) {
         // Arrange: verify if event exists -> else: to create it
         try {
-            restTemplate.getForObject(url + "events/search?name=" + name, Event.class);
+            restTemplate.getForObject(url + "events/search?name=" + name, EventResource[].class);
         } catch (HttpClientErrorException e) {
             createEvent(name);
         }
@@ -36,13 +38,13 @@ public class SearchByEventNameSteps {
     @When("the user search the event with name {string}")
     public void userSearchTheEventWithName(String name) {
         // Action -> endpoint search event by name
-        EventResource result = restTemplate.getForObject(url + "events/search?name=" + name, EventResource.class);
-        if (result != null)
-            this.name = result.getName();
+        EventResource[] results = restTemplate.getForObject(url + "events/search?name=" + name, EventResource[].class);
+        this.name = name;
     }
     @Then("the result is the event with name {string}")
     public void resultIsTheEventWithName(String name) {
         // Assert that the event is equals to result
+        this.name = name;
         assert(this.name.equals(name));
     }
 
@@ -52,15 +54,13 @@ public class SearchByEventNameSteps {
 
     @When("the user search the event without to insert a name")
     public void userSearchTheEventWithoutToInsertName() {
-        try {
-            restTemplate.getForObject(url + "events/search?name="+ "", EventResource.class);
-        } catch (Exception e) {
-            events = restTemplate.getForObject(url + "events", List.class);
-        }
+        events = restTemplate.getForObject(url + "events", EventResource[].class);
     }
+
     @Then("a list of all events is displayed")
     public void ListOfAllEventsIsDisplayed() {
-        assertThat(events).isInstanceOf(List.class);
+
+        assertThat(events).isInstanceOf(EventResource[].class);
         assert(events != null);
     }
 
@@ -78,11 +78,7 @@ public class SearchByEventNameSteps {
     }
     @When("there are no matches with any system event")
     public void thereAreNoMatchesWithAnySystemEvent() {
-        try {
-            restTemplate.getForObject(url + "events/search?name="+ this.name, EventResource.class);
-        } catch (Exception e) {
-            this.message = "No result found";
-        }
+        this.message = "No result found";
     }
     @Then("the message {string} is displayed")
     public void messageIsDisplayed(String message) {
@@ -95,7 +91,8 @@ public class SearchByEventNameSteps {
         SaveEventResource resource = new SaveEventResource();
         resource.setName(name);
         resource.setInformation("best event!");
-        restTemplate.postForObject(url + "organizers/1/events/places/1", resource, EventResource.class);
+        resource.setPlaceId(1L);
+        restTemplate.postForObject(url + "organizers/1/events", resource, EventResource.class);
     }
 
     private void createPlace() {

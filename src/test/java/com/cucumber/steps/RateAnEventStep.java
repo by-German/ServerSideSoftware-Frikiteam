@@ -25,7 +25,8 @@ public class RateAnEventStep {
         resource.setInformation("The mots popular event of the year");
         resource.setPrice(25.0);
         resource.setQuantity(3500);
-        event = restTemplate.postForObject(url + "organizers/1/events/places/1", resource, EventResource.class);
+        resource.setPlaceId(1L);
+        event = restTemplate.postForObject(url + "organizers/1/events", resource, EventResource.class);
     }
 
     @When("fill in the qualification data requested")

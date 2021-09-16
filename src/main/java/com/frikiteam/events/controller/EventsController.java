@@ -18,10 +18,12 @@ public class EventsController {
     @Autowired
     ModelMapper mapper;
 
-    @GetMapping("/search")
-    public EventResource getEventByName(@RequestParam String name) {
-        Event event = eventService.getEventByName(name);
-        return mapper.map(event, EventResource.class);
+    @GetMapping("events/search")
+    public List<EventResource> getEventByName(@RequestParam String name) {
+        List<Event> events = eventService.getEventByName(name);
+        return events.stream()
+                .map(event -> mapper.map(event, EventResource.class))
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/events")
