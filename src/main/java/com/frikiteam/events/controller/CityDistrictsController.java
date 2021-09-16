@@ -32,15 +32,6 @@ public class CityDistrictsController {
         return mapper.map(entity,DistrictResource.class);
     }
 
-    @GetMapping
-    @Operation(summary = "get all districts by pages", tags = {"city-districts"})
-    public Page<DistrictResource> getAllDistricts(Pageable pageable){
-        List<DistrictResource> resources = districtService.getAllDistricts(pageable)
-                .getContent().stream().map(this::convertToResource)
-                .collect(Collectors.toList());
-        return new PageImpl<>(resources,pageable,resources.size());
-    }
-
     @PostMapping
     @Operation(summary = "create a district by a city id", tags = {"city-districts"})
     public DistrictResource createDistrict(@PathVariable Long cityId, @Valid @RequestBody SaveDistrictResource resource){
@@ -62,9 +53,11 @@ public class CityDistrictsController {
         return districtService.deleteDistrict(districtId);
     }
 
-    @GetMapping("{districtId}")
-    @Operation(summary = "Get a district by id", tags = {"city-districts"})
-    public DistrictResource getDistrictById(@PathVariable Long districtId){
-        return convertToResource(districtService.getDistrictById(districtId));
+    @GetMapping
+    @Operation(summary = "Get all districts by city id", tags = {"city-districts"})
+    public List<DistrictResource> getAllDistrictByCityId(@PathVariable Long cityId){
+        return districtService.getAllDistrictsByCityId(cityId).stream()
+                .map(district -> mapper.map(district, DistrictResource.class))
+                .collect(Collectors.toList());
     }
 }

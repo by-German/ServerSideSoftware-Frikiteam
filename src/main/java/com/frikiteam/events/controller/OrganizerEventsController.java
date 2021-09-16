@@ -38,6 +38,7 @@ public class OrganizerEventsController {
 
         // creation event for an organizer, at a place
         Event event = mapper.map(resource, Event.class);
+        event.setId(null);
         return mapper.map(eventService.createEvent(organizerId, event), EventResource.class);
     }
 

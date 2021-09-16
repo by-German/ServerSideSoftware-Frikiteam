@@ -33,12 +33,11 @@ public class CountryCitiesController {
     }
 
     @GetMapping
-    @Operation(summary = "Get all cities by pages", tags = {"country-cities"})
-    public Page<CityResource> getAllCities(Pageable pageable){
-        List<CityResource> resources = cityService.getAllCities(pageable)
-                .getContent().stream().map(this::convertToResource)
+    @Operation(summary = "Get all cities by country Id", tags = {"country-cities"})
+    public List<CityResource> getAllCities(@PathVariable Long countryId){
+        return cityService.getAllCitiesByCountryId(countryId).stream()
+                .map(this::convertToResource)
                 .collect(Collectors.toList());
-        return new PageImpl<>(resources,pageable,resources.size());
     }
 
     @PostMapping

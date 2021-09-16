@@ -1,6 +1,7 @@
 package com.frikiteam.events.service;
 
 import com.frikiteam.events.domain.model.City;
+import com.frikiteam.events.domain.model.Country;
 import com.frikiteam.events.domain.repositories.CityRepository;
 import com.frikiteam.events.domain.repositories.CountryRepository;
 import com.frikiteam.events.domain.service.ICityService;
@@ -10,6 +11,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CityServiceImplementation implements ICityService {
@@ -54,5 +57,12 @@ public class CityServiceImplementation implements ICityService {
     @Override
     public Page<City> getAllCities(Pageable pageable) {
         return cityRepository.findAll(pageable);
+    }
+
+    @Override
+    public List<City> getAllCitiesByCountryId(Long countryId) {
+        return countryRepository.findById(countryId)
+                .map(Country::getCities)
+                .orElseThrow(()->new ResourceNotFoundException("City", "id", countryId));
     }
 }

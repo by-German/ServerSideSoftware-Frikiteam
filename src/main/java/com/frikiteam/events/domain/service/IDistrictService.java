@@ -5,6 +5,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
+
 public interface IDistrictService {
     public District getDistrictById(Long districtId);
 
@@ -13,5 +15,5 @@ public interface IDistrictService {
     public ResponseEntity<?> deleteDistrict (Long districtId);
 
     public Page<District> getAllDistricts(Pageable pageable);
-    //public Page<District> getAllDistrictsByCityId(Long cityId, Pageable pageable);
+    public List<District> getAllDistrictsByCityId(Long cityId);
 }

@@ -1,5 +1,6 @@
 package com.frikiteam.events.service;
 
+import com.frikiteam.events.domain.model.City;
 import com.frikiteam.events.domain.model.District;
 import com.frikiteam.events.domain.repositories.CityRepository;
 import com.frikiteam.events.domain.repositories.DistrictRepository;
@@ -10,6 +11,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class DistrictServiceImplementation implements IDistrictService {
@@ -53,6 +56,13 @@ public class DistrictServiceImplementation implements IDistrictService {
     @Override
     public Page<District> getAllDistricts(Pageable pageable) {
         return districtRepository.findAll(pageable);
+    }
+
+    @Override
+    public List<District> getAllDistrictsByCityId(Long cityId) {
+        return cityRepository.findById(cityId)
+                .map(   City::getDistricts)
+                .orElseThrow(()->new ResourceNotFoundException("City", "Id", cityId));
     }
 
 }

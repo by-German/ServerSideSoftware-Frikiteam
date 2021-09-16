@@ -5,6 +5,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
+
 public interface ICityService {
     City getCityById(Long cityId);
 
@@ -12,6 +14,6 @@ public interface ICityService {
     City updateCity(Long cityId, City requestCity);
     ResponseEntity<?> deleteCity (Long cityId);
 
-    public Page<City> getAllCities(Pageable pageable);
-    //public Page<City> getAllCitiesByCountryId(Long countryId, Pageable pageable);
+    Page<City> getAllCities(Pageable pageable);
+    List<City> getAllCitiesByCountryId(Long countryId);
 }
