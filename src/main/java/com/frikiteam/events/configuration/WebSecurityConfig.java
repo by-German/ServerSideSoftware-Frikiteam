@@ -59,10 +59,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/**" /*all methods permits*/
         };
 
+        String[] denied = new String[] {
+                "/api/organizers/*/events",         // create event
+                "/api/organizers/*/events/*",       // update event
+                "/api/events/*/users/*/comments",   // create comment
+                "/api/customers/*/organizers/*",    // follow organizers
+                "/api/customers/*/events/*"        // follow events
+        };
+
+        // .authorizeRequests()
+        // .antMatchers("/*").permitAll() // routes permits
+        // .anyRequest().authenticated().and()
+
+        //  inverse
+        // .authorizeRequests()
+        // .antMatchers("/*").authenticated() // routes permits
+        // .anyRequest().permitAll().and()
+
         httpSecurity.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/**").permitAll()
-                .anyRequest().authenticated().and()
+                .antMatchers(denied).authenticated() // routes permits
+                .anyRequest().permitAll().and()
                 .exceptionHandling()
                 .authenticationEntryPoint(authenticationEntryPoint).and()
                 .sessionManagement()

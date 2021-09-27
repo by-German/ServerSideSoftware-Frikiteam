@@ -47,10 +47,14 @@ public class EventServiceImpl implements EventService {
                             .orElseThrow(() -> new ResourceNotFoundException("Event", "Id", eventId));
                     if (event1.getOrganizer() != organizer)
                         throw new RuntimeException("Event " + eventId + " for Organizer " + organizerId + " not found");
-                    event1.setName(event.getName());
-                    event1.setQuantity(event.getQuantity());
-                    event1.setPrice(event.getPrice());
+                    event1.setLogo(event.getLogo());
                     event1.setInformation(event.getInformation());
+                    event1.setName(event.getName());
+                    event1.setPrice(event.getPrice());
+                    event1.setQuantity(event.getQuantity());
+                    event1.setVerified(event.getVerified());
+                    event1.setStartDate(event.getStartDate());
+                    event1.setEndDate(event.getEndDate());
                     return eventRepository.save(event1);
                 })
                 .orElseThrow(() -> new ResourceNotFoundException("Organizer", "Id", organizerId));

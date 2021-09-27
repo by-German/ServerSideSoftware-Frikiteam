@@ -6,11 +6,13 @@ public class AuthenticationResponse implements Serializable {
     private Long id;
     private String username;
     private String token;
+    private String role;
 
-    public AuthenticationResponse(String username, String token, Long id) {
+    public AuthenticationResponse(Long id, String username, String token, String role) {
         this.username = username;
         this.token = token;
         this.id = id;
+        this.role = role;
     }
 
     public String getUsername() {
@@ -22,4 +24,7 @@ public class AuthenticationResponse implements Serializable {
     }
 
     public Long getId() {return id; }
+
+    public String getRole() { return role;}
+
 }

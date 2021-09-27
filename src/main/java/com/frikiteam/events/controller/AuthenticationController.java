@@ -3,6 +3,7 @@ package com.frikiteam.events.controller;
 import com.frikiteam.events.domain.model.User;
 import com.frikiteam.events.domain.repositories.UserRepository;
 import com.frikiteam.events.domain.service.DefaultUserDetailsService;
+import com.frikiteam.events.domain.service.OrganizerService;
 import com.frikiteam.events.service.communication.AuthenticationRequest;
 import com.frikiteam.events.service.communication.AuthenticationResponse;
 import com.frikiteam.events.util.JwtCenter;
@@ -29,6 +30,8 @@ public class AuthenticationController {
     private DefaultUserDetailsService userDetailsService;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private OrganizerService organizerService;
 
     @PostMapping("/sign-in")
     public ResponseEntity<?> register(@RequestBody AuthenticationRequest request) throws Exception {
@@ -38,7 +41,14 @@ public class AuthenticationController {
         User user = userRepository.findByEmail(request.getUsername());
         String token = tokenCenter.generateToken(userDetails);
 
-        return ResponseEntity.ok(new AuthenticationResponse(userDetails.getUsername(), token, user.getId()));
+        String roles = getUserRoles(user.getId());
+
+        return ResponseEntity.ok(new AuthenticationResponse(
+                user.getId(), // id
+                userDetails.getUsername(), // username **email
+                token, // token
+                roles
+        ));
     }
 
     private void authenticate(String username, String password) throws Exception {
@@ -52,5 +62,15 @@ public class AuthenticationController {
         } catch (BadCredentialsException e) {
             throw new Exception("INVALID_CREDENTIALS", e);
         }
+    }
+
+    private String getUserRoles(Long id) {
+        // in case failed, to validate field verified
+        try {
+            organizerService.getOrganizerById(id);
+        } catch (Exception e) {
+            return "customer";
+        }
+        return "organizer";
     }
 }
