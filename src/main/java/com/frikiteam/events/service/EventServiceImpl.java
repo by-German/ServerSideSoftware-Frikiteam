@@ -105,7 +105,7 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public List<Event> getEventByName(String name) {
-        return eventRepository.findByName(name);
+        return eventRepository.findByNameContaining(name);
     }
 
     @Override

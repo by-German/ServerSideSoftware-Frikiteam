@@ -73,12 +73,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         //  inverse
         // .authorizeRequests()
-        // .antMatchers("/*").authenticated() // routes permits
+        // .antMatchers("/*").authenticated() // routes denied
         // .anyRequest().permitAll().and()
 
         httpSecurity.csrf().disable()
+                .cors().and()
                 .authorizeRequests()
-                .antMatchers(denied).authenticated() // routes permits
+                .antMatchers(denied).authenticated()
                 .anyRequest().permitAll().and()
                 .exceptionHandling()
                 .authenticationEntryPoint(authenticationEntryPoint).and()
