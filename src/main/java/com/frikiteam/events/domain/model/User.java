@@ -23,6 +23,8 @@ public class User {
 
     protected String password;
 
+    private String logo;
+
     public User() {}
 
     public User(String firstName, String lastName, String password, String email) {

@@ -30,4 +30,6 @@ public interface EventService{
     Event assignCustomerEvent(Long customerId, Long eventId);
 
     Event unnassignCustomerEvent(Long customerId, Long eventId);
+
+    void deleteEvent(Long EventId);
 }

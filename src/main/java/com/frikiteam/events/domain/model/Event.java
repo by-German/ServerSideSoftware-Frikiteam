@@ -1,5 +1,6 @@
 package com.frikiteam.events.domain.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -34,7 +35,7 @@ public class Event {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Place place;
 
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
     private List<EventInformation> eventInformations = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -50,13 +51,13 @@ public class Event {
     private List<SocialNetwork> socialNetworks = new ArrayList<>();
 
     // inverse relationships
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
     List<EventQualification> eventQualifications = new ArrayList<>();
 
     @ManyToMany(mappedBy = "events")
     private List<Customer> customers = new ArrayList<>();
 
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
     List<Itinerary> itineraries = new ArrayList<>();
 
 

@@ -9,5 +9,4 @@ import javax.persistence.Lob;
 public class OrganizerResource extends User {
     private String description;
     private Boolean verified;
-    private String logo;
 }
