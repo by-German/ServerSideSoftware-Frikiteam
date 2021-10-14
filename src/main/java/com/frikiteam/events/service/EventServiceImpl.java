@@ -135,6 +135,7 @@ public class EventServiceImpl implements EventService {
                 .map(event -> {
                     Customer customer = customerRepository.findById(customerId)
                             .orElseThrow(() -> new ResourceNotFoundException("Customer", "Id", customerId));
+                    if (customer.getEvents().contains(event)) return event;
                     customer.getEvents().add(event);
                     customerRepository.save(customer);
                     return event;
