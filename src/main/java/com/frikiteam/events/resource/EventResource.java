@@ -12,6 +12,7 @@ public class EventResource {
     private String name;
     private Double price;
     private int quantity;
+    private int sold;
     private Boolean verified;
     private GregorianCalendar startDate;
     private GregorianCalendar endDate;

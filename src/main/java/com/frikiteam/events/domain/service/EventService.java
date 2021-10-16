@@ -11,6 +11,8 @@ public interface EventService{
 
     Event updateEvent(Long organizerId, Long eventId, Event event);
 
+    Event sellTicket(Long eventId, int quantity);
+
     Event assignEventTag(Long eventId, Long tagId);
 
     Page<Event> getAllEventsByTagId(Long tagId, Pageable pageable);

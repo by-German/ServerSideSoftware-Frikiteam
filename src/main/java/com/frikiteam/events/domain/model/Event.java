@@ -21,6 +21,7 @@ public class Event {
     private String name;
     private Double price;
     private int quantity;
+    private int sold;
     private Boolean verified;
     private GregorianCalendar startDate;
     private GregorianCalendar endDate;
@@ -61,7 +62,9 @@ public class Event {
     List<Itinerary> itineraries = new ArrayList<>();
 
 
-    public Event(String name, int quantity, Double price, String information, Boolean verified, GregorianCalendar startDate, GregorianCalendar endDate) {
+    public Event(String name, int quantity, int sold,
+                 Double price, String information, Boolean verified,
+                 GregorianCalendar startDate, GregorianCalendar endDate) {
         this.name = name;
         this.quantity = quantity;
         this.price = price;
@@ -69,5 +72,6 @@ public class Event {
         this.verified = verified;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.sold = sold;
     }
 }

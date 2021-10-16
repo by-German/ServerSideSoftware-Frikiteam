@@ -35,6 +35,7 @@ public class EventServiceImpl implements EventService {
                 .orElseThrow(() -> new ResourceNotFoundException("Organizer", "id", organizerId));
 
         // assign organizer to event
+        event.setSold(0);
         event.setOrganizer(organizer);
 
         return eventRepository.save(event);
@@ -59,6 +60,17 @@ public class EventServiceImpl implements EventService {
                     return eventRepository.save(event1);
                 })
                 .orElseThrow(() -> new ResourceNotFoundException("Organizer", "Id", organizerId));
+    }
+
+    @Override
+    public Event sellTicket(Long eventId, int quantity) {
+        return eventRepository.findById(eventId).map(event -> {
+            int sell = event.getSold() + quantity;
+            if (sell <= event.getQuantity())
+                event.setSold(event.getSold() + quantity);
+            else throw new RuntimeException("You cannot exceed the number of tickets sold " +  sell + "/" +  quantity);
+            return eventRepository.save(event);
+        }).orElseThrow(() -> new ResourceNotFoundException("Event", "Id", eventId));
     }
 
     @Override
