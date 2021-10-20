@@ -40,4 +40,14 @@ public class EventsInformationController {
         return mapper.map(eventInformationService
                 .createEventInformation(eventId, eventInformation), EventInformationResource.class);
     }
+
+    @PutMapping("{id}")
+    @Operation(summary = "update information for an event", tags = {"events-information"})
+    public EventInformationResource updateEventInformation
+            (@PathVariable Long eventId, @PathVariable Long id, @RequestBody SaveEventInformationResource resource){
+
+        EventInformation eventInformation = mapper.map(resource, EventInformation.class);
+        return mapper.map(eventInformationService
+                .updateEventInformation(id, eventInformation), EventInformationResource.class);
+    }
 }
