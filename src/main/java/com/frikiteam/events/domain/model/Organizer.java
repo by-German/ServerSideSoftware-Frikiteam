@@ -17,8 +17,6 @@ public class Organizer extends User{
 
     private Boolean verified;
 
-    private String logo;
-
     // inverse relationship
     @OneToMany(mappedBy = "organizer")
     private List<Event> events = new ArrayList<>();
@@ -30,10 +28,9 @@ public class Organizer extends User{
 
     public Organizer() { }
 
-    public Organizer(String firstName, String lastName, String password, String email, String description, boolean verified, String logo) {
+    public Organizer(String firstName, String lastName, String password, String email, String description, boolean verified) {
         super(firstName, lastName, password, email);
         this.description = description;
         this.verified = verified;
-        this.logo = logo;
     }
 }

@@ -15,7 +15,7 @@ public class EventQualification {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Customer customer;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
     private Event event;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

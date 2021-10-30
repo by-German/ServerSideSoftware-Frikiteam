@@ -29,6 +29,9 @@ public class Customer extends User {
             inverseJoinColumns = {@JoinColumn(name = "organizer_id")})
     private List<Organizer> organizers = new ArrayList<>();
 
+    @OneToMany(mappedBy = "customer") // inverse
+    private List<Ticket> tickets = new ArrayList<>();
+
     public Customer(){}
     public Customer(String firstName, String lastName, String password, String email, GregorianCalendar dateBirth) {
         super(firstName, lastName, password, email);

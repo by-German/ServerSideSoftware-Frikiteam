@@ -19,7 +19,7 @@ public class Ticket {
     @ManyToOne(fetch =  FetchType.LAZY, optional = false)
     private Event event;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Customer customer;
 
     @ManyToOne(fetch = FetchType.LAZY)

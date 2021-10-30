@@ -20,7 +20,7 @@ public class EventInformation {
     private String description;
     private String image;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Event event;
 
     public EventInformation(){}

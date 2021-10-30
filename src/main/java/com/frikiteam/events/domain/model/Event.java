@@ -1,5 +1,6 @@
 package com.frikiteam.events.domain.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -20,6 +21,7 @@ public class Event {
     private String name;
     private Double price;
     private int quantity;
+    private int sold;
     private Boolean verified;
     private GregorianCalendar startDate;
     private GregorianCalendar endDate;
@@ -34,7 +36,7 @@ public class Event {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Place place;
 
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
     private List<EventInformation> eventInformations = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -50,17 +52,19 @@ public class Event {
     private List<SocialNetwork> socialNetworks = new ArrayList<>();
 
     // inverse relationships
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
     List<EventQualification> eventQualifications = new ArrayList<>();
 
     @ManyToMany(mappedBy = "events")
     private List<Customer> customers = new ArrayList<>();
 
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
     List<Itinerary> itineraries = new ArrayList<>();
 
 
-    public Event(String name, int quantity, Double price, String information, Boolean verified, GregorianCalendar startDate, GregorianCalendar endDate) {
+    public Event(String name, int quantity, int sold,
+                 Double price, String information, Boolean verified,
+                 GregorianCalendar startDate, GregorianCalendar endDate) {
         this.name = name;
         this.quantity = quantity;
         this.price = price;
@@ -68,5 +72,6 @@ public class Event {
         this.verified = verified;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.sold = sold;
     }
 }

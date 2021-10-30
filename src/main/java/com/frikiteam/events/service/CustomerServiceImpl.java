@@ -46,6 +46,7 @@ public class CustomerServiceImpl implements CustomerService {
         Customer existed = customerRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Customer", "id", id));
 
+        existed.setLogo(customer.getLogo());
         existed.setFirstName(customer.getFirstName());
         existed.setLastName(customer.getLastName());
         existed.setDateBirth(customer.getDateBirth());
