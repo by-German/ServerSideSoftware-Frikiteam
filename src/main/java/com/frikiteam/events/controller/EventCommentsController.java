@@ -37,7 +37,7 @@ public class EventCommentsController {
     @PostMapping("users/{userId}/comments")
     @Operation(summary = "Create a comment for a event", tags = "events-comments")
     public CommentResource createComment
-            (@PathVariable Long eventId, @PathVariable Long userId, SaveCommentResource resource) {
+            (@PathVariable Long eventId, @PathVariable Long userId, @RequestBody SaveCommentResource resource) {
 
         Comment comment = mapper.map(resource, Comment.class);
         return mapper.map(commentService.createComment(eventId, userId, comment), CommentResource.class);
